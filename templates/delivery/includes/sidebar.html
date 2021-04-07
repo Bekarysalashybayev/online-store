@@ -22,9 +22,15 @@
             </a>
           </li>
           <li class="nav-item {% if 'ui-tables' in segment %} active {% endif %}">
-            <a class="nav-link" href="/ui-tables.html">
+            <a class="nav-link" href="{% url 'orders' %}">
               <i class="material-icons">content_paste</i>
-              <p>Table List</p>
+              <p>Заказы</p>
+            </a>
+          </li>
+          <li class="nav-item {% if 'ui-tables' in segment %} active {% endif %}">
+            <a class="nav-link" href="{% url 'myorders' %}">
+              <i class="material-icons">content_paste</i>
+              <p>Мои Заказы</p>
             </a>
           </li>
           <li class="nav-item {% if 'ui-typography' in segment %} active {% endif %}">
@@ -66,14 +72,8 @@
 {#            </a>#}
 {#          </li>#}
 
-          <li class="nav-item active-pro ">
-            <a target="_blank" rel="noopener noreferrer"  
-               class="nav-link" 
-               href="https://www.creative-tim.com/product/material-dashboard-django">
-              <i class="material-icons">unarchive</i>
-              <p>See product</p>
-            </a>
-          </li>
+
+
         </ul>
       </div>
       {% endif %}
