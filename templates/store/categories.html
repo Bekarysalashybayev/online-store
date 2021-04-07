@@ -87,7 +87,9 @@
                                     {% if 'Скидка' in l.status.name  %}sale {% endif %}">
                                     <div class="product_inner">
                                         <div class="product_image">
-                                            <img src="/media/{{ l.img1 }}" alt="">
+                                            <a href="{% url 'product' l.id %}">
+                                                <img src="/media/{{ l.img1 }}" alt="">
+                                            </a>
 
                                             <div class="product_tag">{{ l.status.name }}</div>
                                         </div>

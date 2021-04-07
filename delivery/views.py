@@ -5,9 +5,7 @@ from store.models import Order, OrderStatus, OrderDetail
 
 
 def admin_base(request):
-    user = request.user
-    role = user.roles
-    return render(request, 'delivery/index.html')
+    return redirect('orders')
 
 
 # Create your views here.
@@ -18,7 +16,8 @@ def orders(request):
     orders = Order.objects.filter(status__id=1)
 
     context = {
-        "list": orders
+        "list": orders,
+        "segment": "del",
     }
     return render(request, 'delivery/orders.html', context=context)
 
@@ -51,7 +50,8 @@ def deliveryorders(request, id):
 
     context = {
         "order": order,
-        "list": detail
+        "list": detail,
+        "segment": "myorders",
     }
     return render(request, 'delivery/myordersdetail.html', context=context)
 
@@ -64,6 +64,32 @@ def myorders(request):
     orders = Order.objects.filter(delivery=user).order_by('status')
 
     context = {
-        "list": orders
+        "list": orders,
+        "segment": "myorders",
     }
     return render(request, 'delivery/myorders.html', context=context)
+
+
+def orderfinish(request, id):
+    user = request.user
+    role = user.roles
+
+    order = Order.objects.get(id=id)
+    status = OrderStatus.objects.get(id=4)
+    order.status = status
+    order.save()
+
+    return redirect('myorders')
+
+
+# Create your views here.
+def profile(request):
+    user = request.user
+    role = user.roles
+
+    context = {
+        "user": user,
+        "segment": "profile",
+    }
+
+    return render(request, 'delivery/page-user.html', context=context)

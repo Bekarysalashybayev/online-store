@@ -187,7 +187,7 @@
       document.getElementById('lng').value = myLatlng.lng;
 
       map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 15,
         center: myLatlng
       });
 
@@ -198,6 +198,8 @@
       });
 
       marker.addListener('dragend', function(e) {
+          let address = marker.name();
+          print(address);
         var position = marker.getPosition();
         updateCoordinates(position.lat(), position.lng());
       });

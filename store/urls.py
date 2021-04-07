@@ -4,11 +4,12 @@ from store.views import *
 
 urlpatterns = [
     path('', index),
-    path('shop', shop),
-    path('shop/other', shopOther),
-    path('shop/female', shopFeMale),
-    path('shop/male', shopMale),
-    path('blog', blog),
-    path('order', orders),
+    path('shop', shop, name="shop"),
+    path('shop/<int:id>', product, name="product"),
+    path('shop/other', shopOther, name="other"),
+    path('shop/female', shopFeMale, name="female"),
+    path('shop/male', shopMale, name="male"),
+    path('blog', blog, name="blog"),
+    path('order', orders, name="order"),
     path('order/detail/<int:id>', detail),
 ]

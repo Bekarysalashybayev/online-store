@@ -14,10 +14,9 @@ def logining(request):
         user = authenticate(email=username, password=password)
         if user is not None:
             login(request, user)
-
-            return redirect("/account")
+            return redirect("/")
         else:
-            return render(request, 'account/login.html', context={"message": "Error"})
+            return render(request, 'account/login.html', context={"message": "Данные не правильные"})
     # No backend authenticated the credentials
 
     if not request.user.is_authenticated:

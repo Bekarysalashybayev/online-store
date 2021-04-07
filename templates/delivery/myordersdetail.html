@@ -1,6 +1,6 @@
 {% extends "delivery/layouts/base.html" %}
 
-{% block title %} UI Tables {% endblock %} 
+{% block title %} Мои заказы {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
@@ -12,6 +12,38 @@
           height: 400px;
           width: 100%;
         }
+       .custom-map-control-button {
+          appearance: button;
+          background-color: #fff;
+          border: 0;
+          border-radius: 2px;
+          box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+          margin: 10px;
+          padding: 0 0.5em;
+          height: 40px;
+          font: 400 18px Roboto, Arial, sans-serif;
+          overflow: hidden;
+        }
+        .custom-map-control-button:hover {
+          background: #ebebeb;
+        }
+        #floating-panel {
+            width: 200px;
+            margin: 10px auto;
+          z-index: 5;
+          background-color: #fff;
+          padding: 5px;
+          border: 1px solid #999;
+          text-align: center;
+          font-family: "Roboto", "sans-serif";
+          line-height: 30px;
+          padding-left: 10px;
+        }
+        select{
+            padding: 5px 10px;
+        }
+
     </style>
 {% endblock stylesheets %}
 
@@ -26,7 +58,7 @@
                 <div class="card-body">
                   <div class="table-responsive">
                   <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-4" style="margin-top: 100px;">
                           <h5><b>Данные заказа</b></h5>
                             <hr>
                             <p class="order"><b>Адрес:</b> {{ order.address1 }}, {{ order.address2 }}</p>
@@ -39,21 +71,34 @@
                             <p class="order"><b>Имя:</b> {{ order.user.name }} {{ order.user.surname }}</p>
                             <p class="order"><b>Контактные данные:</b>  <a href="tel:{{ order.user.phone }}">{{ order.user.phone }}</a></p>
                             <hr>
+                          <br>
+                          <a href="{% url 'orderfinish' order.id %}" class="btn-lg btn-danger">Завершить</a>
                       </div>
                       <div class="col-md-7">
-                            <div style="display: block">
+                            <div style="display: none">
                                 <p id="lat">{{ order.lat }}</p>
                                 <p id="lng">{{ order.lng }}</p>
                             </div>
-                           <div id="map">
+                          <div id="floating-panel">
+                          <b>Выберите тип транспорта: </b>
+                          <select id="mode">
+                            <option value="WALKING">Пешком</option>
+                            <option value="DRIVING">Машина</option>
+                            <option value="TRANSIT">Маршрут</option>
+                          </select>
+                        </div>
+
+                           <div id="map" style="margin: 0">
 
                            </div>
-                      </div>
+
+
+                  </div>
                   </div>
 
                     <br>
+                      <br>
                     <h5><b>Товары</b></h5>
-                    <br>
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -83,29 +128,89 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-    <script>
-        let map;
-        let lat = document.getElementById('lat').innerHTML;
-        let lng = document.getElementById('lng').innerHTML;
-        let myLatlng = {
-            lat: parseFloat(lat),
-            lng: parseFloat(lng),
-          };
-        function initMap() {
-          map = new google.maps.Map(document.getElementById("map"), {
-            center: myLatlng,
-            zoom: 8,
-          });
-          marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            draggable: true
-          });
+<script>
+    let clat = document.getElementById("lat").innerHTML;
+    let clng = document.getElementById("lng").innerHTML;
+    let infoWindow;
+    let mydist = {
+        "lat": parseFloat(clat),
+        "lng": parseFloat(clng),
+    }
+    let currentdist = {};
+   function initMap() {
+      const directionsRenderer = new google.maps.DirectionsRenderer();
+      const directionsService = new google.maps.DirectionsService();
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        center: mydist,
+      });
+       infoWindow = new google.maps.InfoWindow();
+      const locationButton = document.createElement("button");
+      locationButton.textContent = "Определить текщее местоположение";
+      locationButton.classList.add("custom-map-control-button");
+      map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+      locationButton.addEventListener("click", () => {
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
+              currentdist = pos;
+              infoWindow.setPosition(pos);
+              infoWindow.setContent("Я");
+              infoWindow.open(map);
+              map.setCenter(pos);
+            },
+            () => {
+              handleLocationError(true, infoWindow, map.getCenter());
+            }
+          );
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
         }
-
-    </script>
+      });
+      directionsRenderer.setMap(map);
+      calculateAndDisplayRoute(directionsService, directionsRenderer);
+      document.getElementById("mode").addEventListener("change", () => {
+        calculateAndDisplayRoute(directionsService, directionsRenderer);
+      });
+    }
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(
+        browserHasGeolocation
+          ? "Error: The Geolocation service failed."
+          : "Error: Your browser doesn't support geolocation."
+      );
+      infoWindow.open(map);
+    }
+    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+      const selectedMode = document.getElementById("mode").value;
+      directionsService.route(
+        {
+          origin: currentdist,
+          destination: mydist,
+          // Note that Javascript allows us to access the constant
+          // using square brackets and a string value as its
+          // "property."
+          travelMode: google.maps.TravelMode[selectedMode],
+        },
+        (response, status) => {
+          if (status == "OK") {
+            directionsRenderer.setDirections(response);
+          } else {
+            window.alert("Запрос маршрутов не выполнен из-за " + status);
+          }
+        }
+      );
+    }
+	</script>
      <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_zq8oIH5flWJZ3Vb0uAjZDxZPTFjdI8&callback=initMap&libraries=&v=weekly"
-      async
+        async
     ></script>
 {% endblock %}
