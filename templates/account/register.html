@@ -29,28 +29,33 @@
                   </div>
                   <div class="row align-items-center mt-4">
                     <div class="col">
-                      <input type="text" class="form-control" name="sname" value="{{ sname }}" placeholder="Фамилия*" required>
+                      <input type="text" class="form-control" name="surname" value="{{ sname }}" placeholder="Фамилия*" required>
                     </div>
                   </div>
-                    <div class="row align-items-center mt-4">
+                  <div class="row align-items-center mt-4">
                     <div class="col">
                       <input type="email" class="form-control" name="email" value="{{ email }}" placeholder="Почта*" required>
+                    </div>
+                  </div>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                      <input type="text" class="form-control" name="phone" value="{{ phone }}" placeholder="Номер телефона" required>
                     </div>
                   </div>
                     <div class="row align-items-center mt-4">
                     <div class="col">
                         <label class="form-control">
-                            <input type="file" class="" name="img" style="display: none;">
+                            <input type="file" class="" name="icon" style="display: none;" value="{{ img }}">
                             Выберите фото
                         </label>
                     </div>
                   </div>
                   <div class="row align-items-center mt-4">
                         <div class="col">
-                             <input type="password" name="pass1" class="form-control" value="{{ pass1 }}" placeholder="Password" required>
+                             <input type="password" name="password1" class="form-control" value="{{ pass1 }}" placeholder="Password" required>
                         </div>
                         <div class="col">
-                            <input type="password" name="pass2" class="form-control" value="{{ pass2 }}" placeholder="Confirm Password">
+                            <input type="password" name="password2" class="form-control" value="{{ pass2 }}" placeholder="Confirm Password">
                         </div>
                   </div>
 

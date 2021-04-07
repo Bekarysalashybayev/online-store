@@ -34,12 +34,12 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, phone_number, email=None, password=None,
+    def create_user(self, email=None, password=None,
                     **extra_fields):
-        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', False)
 
-        return self._create_user(phone_number, email, password,
+        return self._create_user(email, password,
                                  **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
@@ -59,7 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=255, unique=True, )
     name = models.CharField(_('first name'), max_length=150, blank=True)
     surname = models.CharField(_('last name'), max_length=150, blank=True)
-    roles = models.ForeignKey(Role, on_delete=models.CASCADE, null=True, blank=True)
+    roles = models.ForeignKey(Role, on_delete=models.CASCADE, default=2, null=True, blank=True)
     icon = models.ImageField(upload_to='images/', blank=True, null=True)
     phone = models.CharField(max_length=255, unique=True, blank= True, null=True)
     is_staff = models.BooleanField(
