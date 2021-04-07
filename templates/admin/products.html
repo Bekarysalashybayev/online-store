@@ -1,0 +1,133 @@
+{% extends "delivery/layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Мои Продукты</h4>
+{#                  <p class="card-category"> Здесь все заказы, которые необходимо доставить</p>#}
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Название
+                        </th>
+                        <th>
+                          Цена
+                        </th>
+                        <th>
+                          Описание
+                        </th>
+                         <th>
+                          Статус
+                        </th>
+                        <th>
+                          Категория
+                        </th>
+                        <th>
+                          Фото1
+                        </th>
+                        <th>
+                          Фото2
+                        </th>
+                        <th>
+                          Фото3
+                        </th>
+                        <th>
+                          Фото4
+                        </th>
+                        <th>
+                          Фото5
+                        </th>
+                      </thead>
+                      <tbody>
+                      {% for l in list %}
+                        <tr>
+                          <td>
+                            {{ l.name }}
+                          </td>
+                          <td>
+                            {{ l.price }} тнг
+                          </td>
+                          <td>
+                              {{ l.description }}
+                          </td>
+                          <td style="
+                                    {% if 'Завершен' in l.status.name %}
+                                        background-color: #cceb6d;
+                                        text-align: center;
+                                    {% endif %}">
+                              {{ l.status }}
+                          </td>
+                          <td class="text-primary" style="
+                                    {% if 'Завершен' in l.status.name %}
+                                        background-color: #cceb6d;
+                                        text-align: center;
+                                    {% endif %}">
+                              {{ l.category }}
+                          </td>
+                          <td class="text-primary" style="
+                                    {% if 'Завершен' in l.status.name %}
+                                        background-color: #cceb6d;
+                                        text-align: center;
+                                    {% endif %}">
+                              {% if l.img1 %}
+                                  <img style="height: 35px; width: 45px;" src="/media/{{ l.img1 }}" alt="">
+                             {% endif %}
+                          </td>
+                          <td class="text-primary" style="
+                                    {% if 'Завершен' in l.status.name %}
+                                        background-color: #cceb6d;
+                                        text-align: center;
+                                    {% endif %}">
+                            {% if l.img2 %}
+                              <img style="height: 35px; width: 45px;" src="/media/{{ l.img2 }}" alt="">
+                            {% endif %}                          </td>
+                         <td class="text-primary" style="
+                                    {% if 'Завершен' in l.status.name %}
+                                        background-color: #cceb6d;
+                                        text-align: center;
+                                    {% endif %}">
+                            {% if l.img3 %}
+                              <img style="height: 35px; width: 45px;" src="/media/{{ l.img3 }}" alt="">
+                         {% endif %}                          </td>
+                         <td class="text-primary" style="
+                                    {% if 'Завершен' in l.status.name %}
+                                        background-color: #cceb6d;
+                                        text-align: center;
+                                    {% endif %}">
+                            {% if l.img4 %}
+                              <img style="height: 35px; width: 45px;" src="/media/{{ l.img4 }}" alt="">
+                         {% endif %}                          </td>
+                         <td class="text-primary" style="
+                                    {% if 'Завершен' in l.status.name %}
+                                        background-color: #cceb6d;
+                                        text-align: center;
+                                    {% endif %}">
+                         {% if l.img5 %}
+                              <img style="height: 35px; width: 45px;" src="/media/{{ l.img5 }}" alt="">
+                         {% endif %}
+                          </td>
+                        </tr>
+                      {% endfor  %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

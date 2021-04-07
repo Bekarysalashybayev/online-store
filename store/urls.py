@@ -11,4 +11,6 @@ urlpatterns = [
     path('blog', blog),
     path('order', orders),
     path('order/detail/<int:id>', detail),
+    path('add-product/', admin_add_product, name='add_product'),
+    path('products/', admin_products, name='admin_products'),
 ]

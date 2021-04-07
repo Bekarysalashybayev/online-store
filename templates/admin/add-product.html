@@ -1,0 +1,89 @@
+{% extends "delivery/layouts/base.html" %}
+
+{% block title %} Добавление продуктов  {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Добавление продуктов</h4>
+{#                  <p class="card-category"> Здесь все заказы, которые необходимо доставить</p>#}
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                      <form action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                        <div class="row" style="margin: 0">
+                    <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
+                        <div class="col-md-4">
+                        <lable>Название</lable>
+                        <input type="text" class="form-control" name="name" value="" placeholder="Название" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
+                        <div class="col-md-4">
+                        <lable>Цена</lable>
+                        <input type="number" class="form-control" name="price" value="" placeholder="цена" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <lable>Категория</lable>
+                        <select class="form-control" name="category" id="">
+                            {% for l in categories %}
+                                <option value="{{ l.id }}">{{ l.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <lable>Статус</lable>
+                        <select class="form-control" name="status" id="">
+                            {% for l in statuses %}
+                                <option value="{{ l.id }}">{{ l.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-12" style="padding-left: 0;padding-top: 30px; padding-bottom: 30px ">
+                        <div class="col-md-4">
+                        <lable>Описание</lable>
+                            <textarea type="number" class="form-control" name="description" value="" rows="5" placeholder="Описание" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="padding: 20px">
+                        <lable>Фотография</lable>
+                        <input type="file" name="img1" >
+                    </div>
+                    <div class="col-md-3" style="padding: 20px">
+                        <lable>Фотография</lable>
+                        <input type="file" name="img2" >
+                    </div>
+                    <div class="col-md-3" style="padding: 20px">
+                        <lable>Фотография</lable>
+                        <input type="file" name="img3" >
+                    </div>
+                    <div class="col-md-3" style="padding: 20px">
+                        <lable>Фотография</lable>
+                        <input type="file" name="img4" >
+                    </div>
+                    <div class="col-md-3" style="padding: 20px">
+                        <lable>Фотография</lable>
+                        <input type="file" name="img5" >
+                    </div>
+                  </div>
+                          <input type="submit" >
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

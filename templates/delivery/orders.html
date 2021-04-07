@@ -1,0 +1,62 @@
+{% extends "delivery/layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Все заказы</h4>
+                  <p class="card-category"> Здесь все заказы, которые необходимо доставить</p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Адрес
+                        </th>
+                        <th>
+                          Номер телефона
+                        </th>
+                        <th>
+                          Сумма заказа
+                        </th>
+                        <th>
+                          Операции
+                        </th>
+                      </thead>
+                      <tbody>
+                      {% for l in list %}
+                        <tr>
+                          <td>
+                            {{ l.address1 }}, {{ l.address2 }}
+                          </td>
+                          <td>
+                            {{ l.phone }}
+                          </td>
+                          <td>
+                              {{ l.total }} тнг
+                          </td>
+                          <td class="text-primary">
+                              <a href="{% url 'getorders' l.id %}">Получить</a>
+                          </td>
+                        </tr>
+                      {% endfor  %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
