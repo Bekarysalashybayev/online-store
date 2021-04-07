@@ -4,6 +4,7 @@ import os
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from django.core.mail import send_mail
 from django.utils import timezone
 
 from django.utils.translation import gettext_lazy as _
@@ -34,12 +35,12 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, phone_number, email=None, password=None,
+    def create_user(self, email=None, password=None,
                     **extra_fields):
-        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', False)
 
-        return self._create_user(phone_number, email, password,
+        return self._create_user(email, password,
                                  **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
@@ -59,7 +60,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=255, unique=True, )
     name = models.CharField(_('first name'), max_length=150, blank=True)
     surname = models.CharField(_('last name'), max_length=150, blank=True)
-    roles = models.ForeignKey(Role, on_delete=models.CASCADE, null=True, blank=True)
+    roles = models.ForeignKey(Role, on_delete=models.CASCADE, default=2, null=True, blank=True)
     icon = models.ImageField(upload_to='images/', blank=True, null=True)
     phone = models.CharField(max_length=255, unique=True, blank= True, null=True)
     is_staff = models.BooleanField(
@@ -112,21 +113,16 @@ class EmailToken(models.Model):
                                   timestamp__range=(today_min, today_max))
         if otps.count() <= 10:
             otp = cls.generate_otp(length=4)
-            phone_token = EmailToken(email=email, otp=otp)
-            phone_token.save()
-            # from_phone = getattr(settings, 'SENDSMS_FROM_NUMBER')
-            # message = SmsMessage(
-            #     body=render_to_string(
-            #         "otp_sms.txt",
-            #         {"otp": otp, "id": phone_token.id}
-            #     ),
-            #     from_phone=from_phone,
-            #     to=[number]
-            #
-            # )
-            # message.send()
-            print(otp)
-            return phone_token
+            email_otp = EmailToken(email=email, otp=otp)
+            email_otp.save()
+            text = "Online-store платформасына кіру: " + str(otp) + "\n" + "Жіберілген СМС 1 минут ішінде жарамды."
+            send_mail(
+                'Online-store',
+                text,
+                settings.EMAIL_HOST_USER,
+                [email],
+            )
+            return email_otp
         else:
             return False
 

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
@@ -5,6 +6,7 @@ from cart.forms import CartAddProductForm
 from store.models import *
 
 
+@login_required(login_url='account/logining')
 def index(request):
     user = request.user
     role = user.roles
