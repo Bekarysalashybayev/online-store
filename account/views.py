@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
-# Create your views here.
 from account.forms import UserForm
 from account.models import User, EmailToken
 
@@ -14,15 +13,27 @@ def logining(request):
         user = authenticate(email=username, password=password)
         if user is not None:
             login(request, user)
+            role = user.roles
 
+            if role.name == 'USER':
+                return redirect('store_index')
+            if role.name == 'ADMIN':
+                pass
+            if role.name == 'DELIVERY':
+                pass
             return redirect("/account")
         else:
             return render(request, 'account/login.html', context={"message": "Error"})
-    # No backend authenticated the credentials
-
     if not request.user.is_authenticated:
         return render(request, 'account/login.html')
     else:
+        role = request.user.roles
+        if role.name == 'USER':
+            return redirect('store_index')
+        if role.name == 'ADMIN':
+            pass
+        if role.name == 'DELIVERY':
+            pass
         return redirect("/account")
 
 
@@ -67,11 +78,6 @@ def register(request):
             instance.save()
             otp = EmailToken.create_otp_for_number(email)
             return redirect('code', pk=instance.pk)
-        else:
-            print(user_form.errors)
-        auth_user = authenticate(email=email, password=pass1)
-        if auth_user is not None:
-            login(request, auth_user)
 
             return redirect("/account")
         else:
@@ -81,13 +87,9 @@ def register(request):
 
 def code(request, pk):
     if request.method == 'POST':
-        print(pk)
         user = User.objects.filter(pk=pk).first()
         email_token = EmailToken.objects.filter(email=user.email)
-
         code = request.POST.get('code')
-        print(code)
-        print(email_token.first().otp)
         if int(email_token.first().otp) == int(code):
             user.is_active = True
             user.is_staff = True
