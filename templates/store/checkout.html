@@ -1,0 +1,219 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="../../static/styles/checkout.css">
+<link rel="stylesheet" type="text/css" href="../../static/styles/checkout_responsive.css">
+    <style>
+    #map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
+    .a {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        color: #414141;
+        line-height: 60px;
+        text-transform: uppercase;
+        -webkit-transition: all 200ms ease;
+        -moz-transition: all 200ms ease;
+        -ms-transition: all 200ms ease;
+        -o-transition: all 200ms ease;
+        transition: all 200ms ease;
+    }
+    .a {
+        color: #007bff;
+        text-decoration: none;
+        background-color: transparent;
+        -webkit-text-decoration-skip: objects;
+    }
+    .a, .a:hover, .a:visited, .a:active, .a:link {
+        text-decoration: none;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
+        text-shadow: rgb(0 0 0 / 1%) 0 0 1px;
+    }
+    .a:-webkit-any-link {
+        color: -webkit-link;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/checkout.jpg' %}" data-speed="0.8"></div>
+		<div class="home_container">
+			<div class="home_content">
+				<div class="home_title">Checkout</div>
+				<div class="breadcrumbs">
+					<ul class="d-flex flex-row align-items-center justify-content-start">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="cart.html">Your Cart</a></li>
+						<li>Checkout</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Checkout -->
+
+	<div class="checkout">
+		<div class="section_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+{#						<div class="checkout_container d-flex flex-xxl-row flex-column align-items-start justify-content-start">#}
+
+                        <form action="checkout" method="POST" id="checkout_form" class="checkout_container d-flex flex-xxl-row flex-column align-items-start justify-content-start">
+							{% csrf_token %}
+                            <!-- Billing -->
+							<div class="billing checkout_box">
+								<div class="checkout_title">Адрес для выставления счета</div>
+								<div class="checkout_form_container">
+                                        <div class="checkout_form">
+										<div>
+											<!-- Address -->
+											<label for="checkout_address">Адрес*</label>
+											<input type="text" id="checkout_address" class="checkout_input" name="address1" value="{{ address1 }}" required="required">
+											<input type="text" id="checkout_address_2" class="checkout_input checkout_address_2" name="address2" value="{{ address2 }}" required="required">
+										</div>
+										<div>
+											<!-- Phone no -->
+											<label for="checkout_phone">Номер телефона*</label>
+											<input type="phone" id="checkout_phone" class="checkout_input" name="phone" value="{{ phone }}" required="required">
+										</div>
+                                        <div style="display: none">
+                                          <label>
+                                            lat
+                                            <input type="text" id="lat" name="lat"/>
+                                          </label>
+                                          <label>
+                                            lng
+                                            <input type="text" id="lng" name="lng"/>
+                                          </label>
+                                        </div>
+                                        <div style="color: #ba2121">
+                                            {{ error }}
+                                        </div>
+                                        <div id="map">
+
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+
+							<!-- Cart Total -->
+							<div class="cart_total">
+								<div class="cart_total_inner checkout_box">
+									<div class="checkout_title">Cart total</div>
+									<ul class="cart_extra_total_list">
+										<li class="d-flex flex-row align-items-center justify-content-start">
+											<div class="cart_extra_total_title">Промежуточный итог</div>
+											<div class="cart_extra_total_value ml-auto">{{ cart.get_total_price }} тнг</div>
+										</li>
+										<li class="d-flex flex-row align-items-center justify-content-start">
+											<div class="cart_extra_total_title">Доставка</div>
+											<div class="cart_extra_total_value ml-auto">Бесплатно</div>
+										</li>
+										<li class="d-flex flex-row align-items-center justify-content-start">
+											<div class="cart_extra_total_title">Общее</div>
+											<div class="cart_extra_total_value ml-auto">{{ cart.get_total_price }} тнг</div>
+										</li>
+									</ul>
+
+									<!-- Payment Options -->
+									<div class="payment">
+										<div class="payment_options">
+											<label class="payment_option clearfix">Paypal
+												<input type="radio" name="radio">
+												<span class="checkmark"></span>
+											</label>
+											<label class="payment_option clearfix">Оплата при доставке
+												<input type="radio" name="radio">
+												<span class="checkmark"></span>
+											</label>
+											<label class="payment_option clearfix">Кредитная карта
+												<input type="radio" name="radio">
+												<span class="checkmark"></span>
+											</label>
+										</div>
+									</div>
+
+									<!-- Order Text -->
+{#									<div class="order_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra temp or so dales. Phasellus sagittis auctor gravida. Integ er bibendum sodales arcu id te mpus. Ut consectetur lacus.</div>#}
+
+									<div class="checkout_button trans_200">
+                                        <input type="submit" class="a" value="Оформить заказ" style="margin:0 auto">
+                                    </div>
+								</div>
+							</div>
+                        </form>
+
+{#						</div>#}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block js_script %}
+    <script>
+    function updateCoordinates(lat, lng) {
+      document.getElementById('lat').value = lat;
+      document.getElementById('lng').value = lng;
+    }
+    function initMap() {
+      let map, marker;
+      let myLatlng = {
+        lat: 43.25263391861023,
+        lng: 76.9166923806056,
+      };
+      document.getElementById('lat').value = myLatlng.lat;
+      document.getElementById('lng').value = myLatlng.lng;
+
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: myLatlng
+      });
+
+      marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        draggable: true
+      });
+
+      marker.addListener('dragend', function(e) {
+        var position = marker.getPosition();
+        updateCoordinates(position.lat(), position.lng());
+      });
+
+      map.addListener('click', function(e) {
+        marker.setPosition(e.latLng);
+        updateCoordinates(e.latLng.lat(), e.latLng.lng());
+      });
+
+      map.panTo(myLatlng);
+    }
+
+
+    </script>
+     <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_zq8oIH5flWJZ3Vb0uAjZDxZPTFjdI8&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+{% endblock %}

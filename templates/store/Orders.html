@@ -1,0 +1,68 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="../../static/styles/cart.css">
+    <link rel="stylesheet" type="text/css" href="../../static/styles/cart_responsive.css">
+{% endblock %}
+{% block content %}
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/product_background.jpg' %}" data-speed="0.8"></div>
+		<div class="home_container">
+			<div class="home_content">
+				<div class="home_title">Мои заказы</div>
+				<div class="breadcrumbs">
+					<ul class="d-flex flex-row align-items-center justify-content-start">
+						<li><a href="/">Главная</a></li>
+						<li>Мои заказы</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Cart -->
+    <div class="container" style="margin: 200px 50px;">
+        <br>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Адрес</th>
+            <th>Номер телефона</th>
+            <th>Сумма заказа</th>
+            <th>Статус</th>
+            <th>Доставщик</th>
+            <th>Детали</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for l in order %}
+          <tr>
+            <td>{{ l.address1 }}, {{ l.address2 }}</td>
+            <td>{{ l.phone }}</td>
+            <td>{{ l.total }} тнг</td>
+            <td><p  style="
+                    {% if 'Завершен' in l.status.name %}
+                        background-color: #cceb6d;
+                        text-align: center;
+                    {% endif %}">{{ l.status }}</p></td>
+            <td>
+                <b>{{ l.delivery.name }}</b>
+                <br>
+                <a href="tel:{{ l.delivery.phone }}">{{ l.delivery.phone }}</a>
+
+            </td>
+          <td>
+              <a href="order/detail/{{ l.id }}">Детали заказа</a>
+          </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+
+{% endblock %}

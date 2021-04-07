@@ -1,0 +1,140 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="../../static/styles/cart.css">
+    <link rel="stylesheet" type="text/css" href="../../static/styles/cart_responsive.css">
+{% endblock %}
+{% block content %}
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/product_background.jpg" data-speed="0.8"></div>
+		<div class="home_container">
+			<div class="home_content">
+				<div class="home_title">Корзина</div>
+				<div class="breadcrumbs">
+					<ul class="d-flex flex-row align-items-center justify-content-start">
+						<li><a href="/">Главная</a></li>
+						<li>Корзина</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Cart -->
+
+	<div class="cart_section">
+		<div class="section_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="cart_container">
+							
+							<!-- Cart Bar -->
+							<div class="cart_bar">
+								<ul class="cart_bar_list item_list d-flex flex-row align-items-center justify-content-start">
+									<li>Product</li>
+									<li>Color</li>
+									<li>Size</li>
+									<li>Price</li>
+									<li>Quantity</li>
+									<li>Total</li>
+								</ul>
+							</div>
+
+							<!-- Cart Items -->
+							<div class="cart_items">
+								<ul class="cart_items_list">
+                                {% for item in cart %}
+                                    {% with product=item.product %}
+									<!-- Cart Item -->
+                                    <li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+										<div class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+                                            <div>
+                                                <div class="product_image">
+                                                    <img src="/media/{{ product.img1 }}" alt="">
+                                                </div>
+                                            </div>
+											<div class="product_name">
+                                                <a href="product.html">{{ product.name }}</a>
+                                            </div>
+										</div>
+
+
+										<div class="product_price text-lg-center product_text"><span>Price: </span>{{ item.price }} тнг</div>
+										<div class="product_quantity_container">
+											<div class="product_quantity ml-lg-auto mr-lg-auto text-center">
+												<span class="product_text product_num">{{ item.quantity }}</span>
+{#												<div class="qty_sub qty_button trans_200 text-center"><span>-</span></div>#}
+{#												<div class="qty_add qty_button trans_200 text-center"><span>+</span></div>#}
+											</div>
+										</div>
+                                        <div class="product_size text-lg-center product_text">
+                                                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                                    {{ item.update_quantity_form.quantity }}
+                                                    {{ item.update_quantity_form.update }}
+                                                    <input type="submit" value="Обновить" style="background-color: transparent;border: none; color: #0c5460">
+                                                    {% csrf_token %}
+                                                  </form>
+                                        </div>
+										<div class="product_total text-lg-center product_text"><span>Total: </span>{{ item.total_price }} тнг</div>
+
+                                        <div class="product_color text-lg-center product_text">
+                                            <a href="{% url 'cart:cart_remove' product.id %}">Удалить</a>
+                                        </div>
+									</li>
+							         {% endwith %}
+                                {% endfor %}
+                                </ul>
+							</div>
+
+							<!-- Cart Buttons -->
+							<div class="cart_buttons d-flex flex-row align-items-start justify-content-start">
+								<div class="cart_buttons_inner ml-auto d-flex flex-row align-items-start justify-content-start flex-wrap">
+									<div class="button button_continue trans_200"><a href="/shop">Продолжать покупку</a></div>
+									<div class="button button_clear trans_200"><a href="{% url 'cart:cart_clear'  %}">clear cart</a></div>
+{#									<div class="button button_update trans_200"><a href="categories.html">update cart</a></div>#}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="section_container cart_extra_container">
+			<div class="container">
+				<div class="row">
+					<!-- Cart Total -->
+                    <div class="col-xxl-3"></div>
+					<div class="col-xxl-6">
+						<div class="cart_extra cart_extra_2">
+							<div class="cart_extra_content cart_extra_total">
+								<div class="cart_extra_title">Всего в корзине</div>
+								<ul class="cart_extra_total_list">
+									<li class="d-flex flex-row align-items-center justify-content-start">
+										<div class="cart_extra_total_title">Промежуточный итог</div>
+										<div class="cart_extra_total_value ml-auto">{{ cart.get_total_price }} тнг</div>
+									</li>
+									<li class="d-flex flex-row align-items-center justify-content-start">
+										<div class="cart_extra_total_title">Доставка</div>
+										<div class="cart_extra_total_value ml-auto">Бесплатно</div>
+									</li>
+									<li class="d-flex flex-row align-items-center justify-content-start">
+										<div class="cart_extra_total_title">Общее</div>
+										<div class="cart_extra_total_value ml-auto">{{ cart.get_total_price }} тнг</div>
+									</li>
+								</ul>
+								<div class="checkout_button trans_200"><a href="checkout">Купить</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

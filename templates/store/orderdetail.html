@@ -1,0 +1,69 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="../../static/styles/cart.css">
+    <link rel="stylesheet" type="text/css" href="../../static/styles/cart_responsive.css">
+{% endblock %}
+{% block content %}
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/product_background.jpg' %}" data-speed="0.8"></div>
+		<div class="home_container">
+			<div class="home_content">
+				<div class="home_title">Мои заказы</div>
+				<div class="breadcrumbs">
+					<ul class="d-flex flex-row align-items-center justify-content-start">
+						<li><a href="/">Главная</a></li>
+						<li><a href="/order">Мои заказы</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Cart -->
+    <div class="container" style="margin: 200px 50px;">
+        <h5><b>Данные заказа</b></h5>
+        <hr>
+        <p class="order"><b>Адрес:</b> {{ order.address1 }}, {{ order.address2 }}</p>
+        <p class="order"><b>Номер телефона:</b> {{ order.phone }}</p>
+        <p class="order"><b>Сумма заказа:</b> {{ order.total }} тнг</p>
+        <p class="order"><b>Статус заказа:</b> {{ order.status }}</p>
+        <hr>
+    {% if order.delivery %}
+        <h5><b>Доставщик</b></h5>
+        <hr>
+        <p class="order"><b>Имя:</b> {{ order.delivery.name }}</p>
+        <p class="order"><b>Контактные данные:</b>  <a href="tel:{{ order.delivery.phone }}">{{ order.delivery.phone }}</a></p>
+        <hr>
+    {% endif %}
+        <br>
+        <h5><b>Товары</b></h5>
+        <br>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for l in detail %}
+          <tr>
+            <td>{{ l.product.name }}</td>
+            <td>{{ l.price }}</td>
+            <td>{{ l.count }} тнг</td>
+            <td>{{ l.total_price }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+
+{% endblock %}

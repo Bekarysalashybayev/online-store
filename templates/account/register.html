@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+  <section style="margin-top: 10%;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-8 col-xl-6">
+          <div class="row">
+            <div class="col text-center">
+              <h1>Register</h1>
+              <p class="text-h3">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia. </p>
+                <p class="text-h3" style="color: red">{{ message }}</p>
+                </div>
+              </div>
+            <form action="register" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                  <div class="row align-items-center">
+                    <div class="col mt-4">
+                      <input type="text" class="form-control" name="name" value="{{ name }}" placeholder="Имя*" required>
+                    </div>
+                  </div>
+                  <div class="row align-items-center mt-4">
+                    <div class="col">
+                      <input type="text" class="form-control" name="sname" value="{{ sname }}" placeholder="Фамилия*" required>
+                    </div>
+                  </div>
+                    <div class="row align-items-center mt-4">
+                    <div class="col">
+                      <input type="email" class="form-control" name="email" value="{{ email }}" placeholder="Почта*" required>
+                    </div>
+                  </div>
+                    <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <label class="form-control">
+                            <input type="file" class="" name="img" style="display: none;">
+                            Выберите фото
+                        </label>
+                    </div>
+                  </div>
+                  <div class="row align-items-center mt-4">
+                        <div class="col">
+                             <input type="password" name="pass1" class="form-control" value="{{ pass1 }}" placeholder="Password" required>
+                        </div>
+                        <div class="col">
+                            <input type="password" name="pass2" class="form-control" value="{{ pass2 }}" placeholder="Confirm Password">
+                        </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary mt-4">Регистрация</button>
+
+
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
