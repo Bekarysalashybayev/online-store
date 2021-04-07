@@ -4,6 +4,7 @@ import os
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from django.core.mail import send_mail
 from django.utils import timezone
 
 from django.utils.translation import gettext_lazy as _
@@ -112,21 +113,16 @@ class EmailToken(models.Model):
                                   timestamp__range=(today_min, today_max))
         if otps.count() <= 10:
             otp = cls.generate_otp(length=4)
-            phone_token = EmailToken(email=email, otp=otp)
-            phone_token.save()
-            # from_phone = getattr(settings, 'SENDSMS_FROM_NUMBER')
-            # message = SmsMessage(
-            #     body=render_to_string(
-            #         "otp_sms.txt",
-            #         {"otp": otp, "id": phone_token.id}
-            #     ),
-            #     from_phone=from_phone,
-            #     to=[number]
-            #
-            # )
-            # message.send()
-            print(otp)
-            return phone_token
+            email_otp = EmailToken(email=email, otp=otp)
+            email_otp.save()
+            text = "Online-store платформасына кіру: " + str(otp) + "\n" + "Жіберілген СМС 1 минут ішінде жарамды."
+            send_mail(
+                'Online-store',
+                text,
+                settings.EMAIL_HOST_USER,
+                [email],
+            )
+            return email_otp
         else:
             return False
 

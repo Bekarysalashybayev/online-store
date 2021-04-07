@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from account.forms import UserForm
-from account.models import User
+from account.models import User, EmailToken
 
 
 def logining(request):
@@ -35,8 +35,6 @@ def register(request):
         phone = request.POST['phone']
         pass2 = request.POST['password2']
         img = request.FILES
-        # print(img['img'])
-
         context = {
             "name": name,
             "sname": sname,
@@ -63,13 +61,12 @@ def register(request):
         if pass1 != pass2:
             context["message"] = "пароли не совпадают"
             return render(request, 'account/register.html', context=context)
-        # user = User.objects.create_user(email=email, password='123')
-        # user.set_password('123')
-        # user.save()
         user_form = UserForm(request.POST, request.FILES)
         if user_form.is_valid():
             instance = user_form.save(commit=False)
             instance.save()
+            otp = EmailToken.create_otp_for_number(email)
+            return redirect('code', pk=instance.pk)
         else:
             print(user_form.errors)
         auth_user = authenticate(email=email, password=pass1)
@@ -80,3 +77,26 @@ def register(request):
         else:
             return render(request, 'account/login.html', context={"message": "Error"})
     return render(request, 'account/register.html')
+
+
+def code(request, pk):
+    if request.method == 'POST':
+        print(pk)
+        user = User.objects.filter(pk=pk).first()
+        email_token = EmailToken.objects.filter(email=user.email)
+
+        code = request.POST.get('code')
+        print(code)
+        print(email_token.first().otp)
+        if int(email_token.first().otp) == int(code):
+            user.is_active = True
+            user.is_staff = True
+            user.save()
+            email_token = email_token.first()
+            email_token.used = True
+            email_token.attempts += 1
+            email_token.save()
+
+            return redirect("/account/logining")
+
+    return render(request, 'account/code.html', {'pk': pk})

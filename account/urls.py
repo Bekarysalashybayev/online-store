@@ -5,4 +5,5 @@ from account.views import *
 urlpatterns = [
     path('logining', logining),
     path('register', register),
+    path('code/<int:pk>/', code, name='code'),
 ]
