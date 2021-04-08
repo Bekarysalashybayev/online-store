@@ -9,16 +9,14 @@ def logining(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-
         user = authenticate(email=username, password=password)
         if user is not None:
             login(request, user)
             role = user.roles
-
             if role.name == 'USER':
                 return redirect('store_index')
             if role.name == 'ADMIN':
-                pass
+                return redirect('admin_products')
             if role.name == 'DELIVERY':
                 pass
             return redirect("/account")

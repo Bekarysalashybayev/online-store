@@ -1,0 +1,62 @@
+{% extends "delivery/layouts/base.html" %}
+
+{% block title %} Добавление продуктов  {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Добавить доставщика</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                      <form action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                        <div class="row" style="margin: 0">
+                    <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
+                        <div class="col-md-4">
+                        <lable>Имя</lable>
+                        <input type="text" class="form-control" name="name" value="" placeholder="Имя" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
+                        <div class="col-md-4">
+                        <lable>Фамилия</lable>
+                        <input type="number" class="form-control" name="surname" value="" placeholder="цена" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
+                        <div class="col-md-4">
+                            <lable>Email</lable>
+                            <input type="text" class="form-control" name="email" value="" placeholder="цена" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
+                        <div class="col-md-4">
+                            <lable>Phone</lable>
+                            <input type="text" class="form-control" name="email" value="" placeholder="цена" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="padding: 20px">
+                        <lable>Фотография</lable>
+                        <input type="file" name="img1" required >
+                    </div>
+                        </div>
+
+                          <input type="submit" >
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

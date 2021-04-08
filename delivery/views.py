@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from account.models import User
 from store.models import Order, OrderStatus, OrderDetail
 
 
@@ -93,3 +94,15 @@ def profile(request):
     }
 
     return render(request, 'delivery/page-user.html', context=context)
+
+
+
+
+def admin_deliveries(request):
+    users = User.objects.filter(roles__name="DELIVERY")
+    return render(request, 'admin/deliveries.html', {'list': users, 'segment': 'delivery'})
+
+
+def admin_add_deliveries(request):
+    if request.method == "GET":
+        return render(request, 'admin/add-delivery.html', {'segment': 'delivery'})

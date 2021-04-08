@@ -10,4 +10,6 @@ urlpatterns = [
     path('orders/my', myorders, name="myorders"),
     path('orders/my/<int:id>', deliveryorders, name="deliveryorders"),
     path('orders/my/<int:id>/finish', orderfinish, name="orderfinish"),
+    path('deliveries/', admin_deliveries, name="deliveries_list"),
+    path('add-deliveries/', admin_add_deliveries, name="add_deliveries"),
 ]
