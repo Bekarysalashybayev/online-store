@@ -7,7 +7,7 @@ from cart.forms import CartAddProductForm
 from store.models import *
 
 
-@login_required(login_url='account/logining')
+@login_required(login_url='/account/logining')
 def index(request):
     user = request.user
     role = user.roles
@@ -18,6 +18,7 @@ def index(request):
     return render(request, 'store/index.html', context={"role": role, "list": products, "cart": cart, "blog": blog})
 
 
+@login_required(login_url='/account/logining')
 def shop(request):
     user = request.user
     role = user.roles
@@ -39,6 +40,7 @@ def shop(request):
     return render(request, 'store/categories.html', context=context)
 
 
+@login_required(login_url='/account/logining')
 def shopOther(request):
     user = request.user
     role = user.roles
@@ -56,6 +58,7 @@ def shopOther(request):
     return render(request, 'store/categories.html', context=context)
 
 
+@login_required(login_url='/account/logining')
 def shopFeMale(request):
     user = request.user
     role = user.roles
@@ -72,6 +75,7 @@ def shopFeMale(request):
     return render(request, 'store/categories.html', context=context)
 
 
+@login_required(login_url='/account/logining')
 def shopMale(request):
     user = request.user
     role = user.roles
@@ -88,6 +92,7 @@ def shopMale(request):
     return render(request, 'store/categories.html', context=context)
 
 
+@login_required(login_url='/account/logining')
 def product(request, id):
     user = request.user
     role = user.roles
@@ -109,6 +114,7 @@ def product(request, id):
     return render(request, 'store/product.html', context=context)
 
 
+@login_required(login_url='/account/logining')
 def blog(request):
     user = request.user
     role = user.roles
@@ -123,6 +129,7 @@ def blog(request):
     return render(request, 'store/blog.html', context=context)
 
 
+@login_required(login_url='/account/logining')
 def orders(request):
     user = request.user
     role = user.roles
@@ -139,6 +146,7 @@ def orders(request):
     return render(request, 'store/Orders.html', context=context)
 
 
+@login_required(login_url='/account/logining')
 def detail(request, id):
     user = request.user
     role = user.roles
@@ -156,6 +164,7 @@ def detail(request, id):
     return render(request, 'store/orderdetail.html', context=context)
 
 
+@login_required(login_url='/account/logining')
 def admin_add_product(request):
     if request.method == "POST":
         data = request.POST
@@ -175,19 +184,20 @@ def admin_add_product(request):
             img1=img1, img2=img2, img3=img3, img4=img4, img5=img5
         )
 
-        return render(request, 'admin/add-product.html', )
+        return render(request, 'admin/add-product.html', {"segment": "products"})
 
     if request.method == "GET":
         categories = Category.objects.all()
         statuses = Status.objects.all()
         context = {
             'categories': categories,
-            'statuses': statuses
+            'statuses': statuses,
+            "segment": "products"
         }
         return render(request, 'admin/add-product.html', context)
 
 
+@login_required(login_url='/account/logining')
 def admin_products(request):
     list = Product.objects.all().order_by('-pk')
-    return render(request, 'admin/products.html', {'list': list})
-
+    return render(request, 'admin/products.html', {'list': list, "segment": "products"})

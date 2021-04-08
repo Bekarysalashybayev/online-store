@@ -72,7 +72,11 @@
                             <p class="order"><b>Контактные данные:</b>  <a href="tel:{{ order.user.phone }}">{{ order.user.phone }}</a></p>
                             <hr>
                           <br>
-                          <a href="{% url 'orderfinish' order.id %}" class="btn-lg btn-danger">Завершить</a>
+                          <a href="{% url 'orderfinish' order.id %}"
+                             class="btn-lg btn-danger"
+                             data-toggle="modal"
+                             data-target="#confirmDeleteModal"
+                                                           id='deleteButton'>Завершить</a>
                       </div>
                       <div class="col-md-7">
                             <div style="display: none">
@@ -124,10 +128,36 @@
               </div>
             </div>
         </div>
+     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" caller-id="" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body confirm-delete">
+                        Вы завершили поездку?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                id="confirmDeleteButtonModal">Подтвердить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+<script type="text/javascript">
+    $(document).on('click', '.confirm-delete', function () {
+        $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+    });
+
+    $(document).on('click', '#confirmDeleteButtonModal', function () {
+        var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+        window.location.href = document.getElementById('deleteButton').href;
+    });
+</script>
 <script>
     let clat = document.getElementById("lat").innerHTML;
     let clng = document.getElementById("lng").innerHTML;
@@ -213,4 +243,5 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_zq8oIH5flWJZ3Vb0uAjZDxZPTFjdI8&callback=initMap&libraries=&v=weekly"
         async
     ></script>
+
 {% endblock %}

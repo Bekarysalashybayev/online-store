@@ -12,4 +12,6 @@ urlpatterns = [
     path('orders/my/<int:id>/finish', orderfinish, name="orderfinish"),
     path('deliveries/', admin_deliveries, name="deliveries_list"),
     path('add-deliveries/', admin_add_deliveries, name="add_deliveries"),
+    path('delete-deliverie/<int:id>', delete_delivery, name="delete_delivery"),
+    path('delete-product/<int:id>', delete_product, name="delete_product"),
 ]

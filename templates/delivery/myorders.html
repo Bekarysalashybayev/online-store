@@ -59,9 +59,11 @@
                                         text-align: center;
                                     {% endif %}">
                               {% if 'Доставщик подтвердил' in l.status.name %}
-                                <a href="{% url 'deliveryorders' l.id %}">Доставить</a>
+                                <a href="{% url 'deliveryorders' l.id %}" class="btn btn-danger confirm-delete"
+                                                           data-toggle="modal" data-target="#confirmDeleteModal"
+                                                           id='deleteButton{{ l.id }}'>Доставить</a>
                               {% elif  'Доставка осуществляется' in l.status.name%}
-                                  <a href="{% url 'deliveryorders' l.id %}">Посмотреть</a>
+                                  <a href="{% url 'deliveryorders' l.id %}" class="btn btn-danger confirm-delete">Посмотреть</a>
                                {% else %}
 
                               {% endif %}
@@ -75,8 +77,34 @@
               </div>
             </div>
         </div>
-
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" caller-id="" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body confirm-delete">
+                        Доставите сейчас?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                id="confirmDeleteButtonModal">Подтвердить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).on('click', '.confirm-delete', function () {
+        $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+    });
+
+    $(document).on('click', '#confirmDeleteButtonModal', function () {
+        var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+        window.location = $("#".concat(caller)).attr("href");
+    });
+</script>
+{% endblock javascripts %}

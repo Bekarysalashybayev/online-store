@@ -22,6 +22,7 @@
               <p>Профиль</p>
             </a>
           </li>
+        {% if request.user.roles.name == "DELIVERY" %}
           <li class="nav-item {% if 'del' == segment %} active {% endif %}">
             <a class="nav-link" href="{% url 'orders' %}">
               <i class="material-icons">content_paste</i>
@@ -34,8 +35,16 @@
               <p>Мои Заказы</p>
             </a>
           </li>
+            {% endif %}
         {% if request.user.roles.name == "ADMIN" %}
-          <li class="nav-item {% if 'delivery' in segment %} active {% endif %}">
+          <li class="nav-item {% if 'products' in segment %} active {% endif %}">
+
+            <a class="nav-link" href="{% url 'admin_products' %}">
+              <i class="material-icons">content_paste</i>
+              <p>Продукты</p>
+            </a>
+          </li>
+            <li class="nav-item {% if 'delivery' in segment %} active {% endif %}">
 
             <a class="nav-link" href="{% url 'deliveries_list' %}">
               <i class="material-icons">content_paste</i>

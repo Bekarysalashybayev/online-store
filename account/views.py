@@ -18,8 +18,8 @@ def logining(request):
             if role.name == 'ADMIN':
                 return redirect('admin_products')
             if role.name == 'DELIVERY':
-                pass
-            return redirect("/account")
+                return redirect('orders')
+            return redirect("/")
         else:
             return render(request, 'account/login.html', context={"message": "Error"})
 
@@ -30,10 +30,10 @@ def logining(request):
         if role.name == 'USER':
             return redirect('store_index')
         if role.name == 'ADMIN':
-            pass
+            return redirect('admin_products')
         if role.name == 'DELIVERY':
-            pass
-        return redirect("/account")
+            return redirect('orders')
+            return redirect("/")
 
 
 def register(request):

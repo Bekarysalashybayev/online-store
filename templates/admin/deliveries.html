@@ -29,6 +29,9 @@
                          <th>
                           Фото
                         </th>
+                         <th>
+                          Операции
+                        </th>
                       </thead>
                       <tbody>
                       {% for l in list %}
@@ -47,8 +50,16 @@
                                         background-color: #cceb6d;
                                         text-align: center;
                                     {% endif %}">
-                              <img style="height: 35px; width: 45px;" src="/media/{{ l.img5 }}" alt="">
+                              <img style="height: 35px; width: 45px;" src="/media/{{ l.icon }}" alt="">
                           </td>
+                        <td>
+                                    <a href="" class="btn btn-warning"
+                                                           id='{{ l.id }}'>Обновить</a>
+                                    <a href="{% url 'delete_delivery' l.id %}"
+                                                           class="btn btn-danger confirm-delete"
+                                                           data-toggle="modal" data-target="#confirmDeleteModal"
+                                                           id='deleteButton{{ l.id }}'>Удалить</a>
+                                </td>
                         </tr>
                       {% endfor  %}
                       </tbody>
@@ -58,8 +69,34 @@
               </div>
             </div>
         </div>
-
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" caller-id="" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body confirm-delete">
+                        Вы точно хотите удалить?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                id="confirmDeleteButtonModal">Удалить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).on('click', '.confirm-delete', function () {
+        $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+    });
+
+    $(document).on('click', '#confirmDeleteButtonModal', function () {
+        var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+        window.location = $("#".concat(caller)).attr("href");
+    });
+</script>
+{% endblock javascripts %}
