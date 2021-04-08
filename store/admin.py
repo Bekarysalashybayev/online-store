@@ -4,5 +4,5 @@ from django.contrib import admin
 from store.models import *
 
 admin.site.register(
-    [Status, Category, Product, OrderStatus, Order, OrderDetail]
+    [Status, Category, Product, OrderStatus, Order, OrderDetail, Blog]
 )
