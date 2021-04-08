@@ -51,13 +51,26 @@
               <p>Доставщики</p>
             </a>
           </li>
-            {% endif %}
-          <li class="nav-item {% if 'ui-notifications' in segment %} active {% endif %}">
-            <a class="nav-link" href="#">
-              <i class="material-icons">notifications</i>
-              <p>Notifications</p>
+          <li class="nav-item {% if 'blog' in segment %} active {% endif %}">
+
+            <a class="nav-link" href="{% url 'admin_blog_list' %}">
+              <i class="material-icons">content_paste</i>
+              <p>Блог</p>
             </a>
           </li>
+            <li class="nav-item {% if 'order' in segment %} active {% endif %}">
+            <a class="nav-link" href="{% url 'order_list_admin' %}">
+              <i class="material-icons">content_paste</i>
+              <p>Заказы</p>
+            </a>
+          </li>
+            {% endif %}
+{#          <li class="nav-item {% if 'ui-notifications' in segment %} active {% endif %}">#}
+{#            <a class="nav-link" href="#">#}
+{#              <i class="material-icons">notifications</i>#}
+{#              <p>Notifications</p>#}
+{#            </a>#}
+{#          </li>#}
 
 
           <li class="nav-item ">

@@ -11,24 +11,23 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Добавление продуктов</h4>
-{#                  <p class="card-category"> Здесь все заказы, которые необходимо доставить</p>#}
+                  <h4 class="card-title ">{{ action }}</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                      <form action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data">
+                      <form method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
                         <div class="row" style="margin: 0">
                     <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
                         <div class="col-md-4">
                         <lable>Название</lable>
-                        <input type="text" class="form-control" name="name" value="" placeholder="Название" required>
+                        <input type="text" class="form-control" name="name" value="{{ product.name }}" placeholder="Название" required>
                         </div>
                     </div>
                     <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
                         <div class="col-md-4">
                         <lable>Цена</lable>
-                        <input type="number" class="form-control" name="price" value="" placeholder="цена" required>
+                        <input type="number" class="form-control" name="price" value="{{ product.price }}" placeholder="цена" required>
                         </div>
                     </div>
 
@@ -36,7 +35,7 @@
                         <lable>Категория</lable>
                         <select class="form-control" name="category" id="">
                             {% for l in categories %}
-                                <option value="{{ l.id }}">{{ l.name }}</option>
+                                <option value="{{ l.id }}" {% if product.category_id == l.id %} selected {% endif %}>{{ l.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -44,35 +43,60 @@
                         <lable>Статус</lable>
                         <select class="form-control" name="status" id="">
                             {% for l in statuses %}
-                                <option value="{{ l.id }}">{{ l.name }}</option>
+                                <option value="{{ l.id }}" {% if product.status_id == l.id %} selected {% endif %}>{{ l.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="col-md-12" style="padding-left: 0;padding-top: 30px; padding-bottom: 30px ">
                         <div class="col-md-4">
                         <lable>Описание</lable>
-                            <textarea type="number" class="form-control" name="description" value="" rows="5" placeholder="Описание" required></textarea>
+                            <textarea  class="form-control" name="description" value="" rows="5" placeholder="Описание" required>{{ product.description }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-3" style="padding: 20px">
-                        <lable>Фотография</lable>
-                        <input type="file" name="img1" required >
+                       {% if product.img1 %}
+                           <img style="height: 60px; width: 60px" src="/media/{{ product.img1 }}" alt="">
+                            <input type="file" name="img1" >
+                        {% else %}
+                            <lable>Фотография</lable>
+                            <input type="file" name="img1" required >
+                        {% endif %}
                     </div>
                     <div class="col-md-3" style="padding: 20px">
-                        <lable>Фотография</lable>
-                        <input type="file" name="img2" required >
+                        {% if product.img2 %}
+                           <img style="height: 60px; width: 60px" src="/media/{{ product.img2 }}" alt="">
+                            <input type="file" name="img2" >
+                        {% else %}
+                            <lable>Фотография</lable>
+                            <input type="file" name="img2" required >
+                        {% endif %}
                     </div>
                     <div class="col-md-3" style="padding: 20px">
-                        <lable>Фотография</lable>
-                        <input type="file" name="img3" required >
+                        {% if product.img3 %}
+                           <img style="height: 60px; width: 60px" src="/media/{{ product.img3 }}" alt="">
+                            <input type="file" name="img3" >
+                        {% else %}
+                            <lable>Фотография</lable>
+                            <input type="file" name="img3" required >
+                        {% endif %}
                     </div>
                     <div class="col-md-3" style="padding: 20px">
-                        <lable>Фотография</lable>
-                        <input type="file" name="img4" required >
+                        {% if product.img4 %}
+                           <img style="height: 60px; width: 60px" src="/media/{{ product.img4 }}" alt="">
+                            <input type="file" name="img4" >
+                        {% else %}
+                            <lable>Фотография</lable>
+                            <input type="file" name="img4" required >
+                        {% endif %}
                     </div>
                     <div class="col-md-3" style="padding: 20px">
-                        <lable>Фотография</lable>
-                        <input type="file" name="img5" required >
+                        {% if product.img5 %}
+                           <img style="height: 60px; width: 60px" src="/media/{{ product.img5 }}" alt="">
+                            <input type="file" name="img5" >
+                        {% else %}
+                            <lable>Фотография</lable>
+                            <input type="file" name="img5" required >
+                        {% endif %}
                     </div>
                   </div>
                   <div style="position: relative;">

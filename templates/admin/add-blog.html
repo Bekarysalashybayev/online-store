@@ -1,0 +1,72 @@
+{% extends "delivery/layouts/base.html" %}
+
+{% block title %} Добавление продуктов  {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">{{ action }} блог</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+
+                     <form method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                          <div class="row" style="margin: 0">
+                              <div class="col-md-12">
+                                  <div class="text" style="color: #ba2121; margin-left: 10px;">{{ message }}</div>
+                              </div>
+                          </div>
+                          <br>
+                      <div class="row" style="margin: 0">
+                        <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
+                            <div class="col-md-4">
+                            <lable>Название</lable>
+                            <input type="text" class="form-control" name="name" value="{{ name }}" placeholder="Имя" required>
+                            </div>
+                        </div>
+                          <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
+                            <div class="col-md-4">
+                            <lable>Описание</lable>
+                                <textarea rows="5" type="text" class="form-control" name="description"  placeholder="Описание" required> {{ description }}</textarea>
+                            </div>
+                        </div>
+                          <div class="col-md-12" style="padding:0 20px">
+                            {% if img %}
+                                <img style="height: 300px; width: 480px" src="/media/{{ img }}" alt="">
+                            {% endif %}
+                          </div>
+                        <div class="col-md-3" style="padding: 20px">
+
+                            <lable>Фотография</lable>
+                            {% if img %}
+                                <input type="file" name="img" >
+                            {% else %}
+                                <input type="file" name="img" required >
+                            {% endif %}
+
+                        </div>
+                      </div>
+
+                    <div style="position: relative;">
+                        <input class="btn btn-danger" type="submit" value="Сохранить" style="position: absolute; right: 50px;">
+                     </div>
+                          <br>
+                          <br>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

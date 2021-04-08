@@ -1,0 +1,106 @@
+{% extends "delivery/layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+        <a class="btn" href="{% url 'add_blog_admin' %}">Добавить блог</a>
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Мои блога</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Название
+                        </th>
+                        <th style="width: 50%">
+                          Описание
+                        </th>
+                        <th>
+                          Фото
+                        </th>
+                         <th>
+                          Дата
+                        </th>
+
+                        <th>
+                          Операции
+                        </th>
+                      </thead>
+                      <tbody>
+                      {% for l in list %}
+                        <tr>
+                          <td>
+                            {{ l.name }}
+                          </td>
+                          <td>
+                              {{ l.description }}
+                          </td>
+                          <td class="text-primary" style="
+                                    {% if 'Завершен' in l.status.name %}
+                                        background-color: #cceb6d;
+                                        text-align: center;
+                                    {% endif %}">
+                              {% if l.img %}
+                                  <img style="height: 35px; width: 45px;" src="/media/{{ l.img }}" alt="">
+                             {% endif %}
+                          </td>
+                          <td>
+                            {{ l.creat_at }}
+                          </td>
+                        <td>
+                            <a href="{% url 'update_blog_admin' l.id %}" class="btn btn-warning"
+                                                   id='{{ l.id }}'>Обновить</a>
+                            <a href="{% url 'delete_blog_admin' l.id %}"
+                                                   class="btn btn-danger confirm-delete"
+                                                   data-toggle="modal" data-target="#confirmDeleteModal"
+                                                   id='deleteButton{{ l.id }}'>Удалить</a>
+                        </td>
+                        </tr>
+                      {% endfor  %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" caller-id="" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body confirm-delete">
+                        Вы точно хотите удалить?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                id="confirmDeleteButtonModal">Удалить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).on('click', '.confirm-delete', function () {
+        $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+    });
+
+    $(document).on('click', '#confirmDeleteButtonModal', function () {
+        var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+        window.location = $("#".concat(caller)).attr("href");
+    });
+</script>
+{% endblock javascripts %}

@@ -1,0 +1,103 @@
+{% extends "delivery/layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Заказы</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Получатель
+                        </th>
+                        <th>
+                          Куда
+                        </th>
+                        <th>
+                          Общая цена
+                        </th>
+                         <th>
+                          Номер
+                        </th>
+                        <th>
+                          Статус
+                        </th>
+                        <th>
+                          Доставщик
+                        </th>
+
+                      </thead>
+                      <tbody>
+                      {% for l in list %}
+                        <tr>
+                          <td>
+                            {{ l.user.name }} {{ l.user.surname }}
+                          </td>
+                          <td>
+                              {{ l.address1 }} {{ l.address2 }}
+                          </td>
+                            <td>
+                              {{ l.total }} тг
+                          </td>
+                        <td>
+                              {{ l.phone }}
+                          </td>
+                        <td>
+                              {{ l.status.name }}
+                          </td>
+                        <td>
+                              {{ l.delivery.name }} {{ l.delivery.surname }}
+                          </td>
+                            <td>
+                                <a href="{% url 'order_detail_list' l.id %}" class="btn btn-danger confirm-delete"> Детали</a>
+                          </td>
+                        </tr>
+                      {% endfor  %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" caller-id="" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body confirm-delete">
+                        Вы точно хотите удалить?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                id="confirmDeleteButtonModal">Удалить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).on('click', '.confirm-delete', function () {
+        $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+    });
+
+    $(document).on('click', '#confirmDeleteButtonModal', function () {
+        var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+        window.location = $("#".concat(caller)).attr("href");
+    });
+</script>
+{% endblock javascripts %}
