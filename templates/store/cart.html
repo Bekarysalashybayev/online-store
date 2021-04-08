@@ -9,7 +9,7 @@
 	<!-- Home -->
 
 	<div class="home">
-		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/product_background.jpg" data-speed="0.8"></div>
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/product_background.jpg' %}" data-speed="0.8"></div>
 		<div class="home_container">
 			<div class="home_content">
 				<div class="home_title">Корзина</div>
@@ -36,12 +36,12 @@
 							<!-- Cart Bar -->
 							<div class="cart_bar">
 								<ul class="cart_bar_list item_list d-flex flex-row align-items-center justify-content-start">
-									<li>Product</li>
-									<li>Color</li>
-									<li>Size</li>
-									<li>Price</li>
-									<li>Quantity</li>
-									<li>Total</li>
+									<li>Фото</li>
+									<li>Цена</li>
+									<li>Количество</li>
+									<li>Изменить</li>
+									<li>Общая сумма</li>
+									<li>Удалить</li>
 								</ul>
 							</div>
 
@@ -95,7 +95,7 @@
 							<div class="cart_buttons d-flex flex-row align-items-start justify-content-start">
 								<div class="cart_buttons_inner ml-auto d-flex flex-row align-items-start justify-content-start flex-wrap">
 									<div class="button button_continue trans_200"><a href="/shop">Продолжать покупку</a></div>
-									<div class="button button_clear trans_200"><a href="{% url 'cart:cart_clear'  %}">clear cart</a></div>
+									<div class="button button_clear trans_200"><a href="{% url 'cart:cart_clear'  %}">очищать корзину </a></div>
 {#									<div class="button button_update trans_200"><a href="categories.html">update cart</a></div>#}
 								</div>
 							</div>

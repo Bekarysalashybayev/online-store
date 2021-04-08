@@ -24,6 +24,7 @@ def logining(request):
             return redirect("/account")
         else:
             return render(request, 'account/login.html', context={"message": "Error"})
+
     if not request.user.is_authenticated:
         return render(request, 'account/login.html')
     else:
