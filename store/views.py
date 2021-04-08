@@ -13,8 +13,9 @@ def index(request):
     role = user.roles
     cart = Cart(request)
     products = Product.objects.all()
+    blog = Blog.objects.all()[:2]
 
-    return render(request, 'store/index.html', context={"role": role, "list": products, "cart": cart})
+    return render(request, 'store/index.html', context={"role": role, "list": products, "cart": cart, "blog": blog})
 
 
 def shop(request):
@@ -26,11 +27,14 @@ def shop(request):
     cart_product_form = CartAddProductForm()
     cart = Cart(request)
 
+    blog = Blog.objects.all()[:2]
+
     context = {
         "list": products,
         "cart_product_form": cart_product_form,
         "cat": "all",
         "cart": cart,
+        "blog": blog,
     }
     return render(request, 'store/categories.html', context=context)
 
@@ -41,11 +45,13 @@ def shopOther(request):
 
     cart = Cart(request)
     products = Product.objects.filter(category__name="Другое")
+    blog = Blog.objects.all()[:2]
 
     context = {
         "list": products,
         "cat": "other",
         "cart": cart,
+        "blog": blog,
     }
     return render(request, 'store/categories.html', context=context)
 
@@ -55,11 +61,13 @@ def shopFeMale(request):
     role = user.roles
     cart = Cart(request)
     products = Product.objects.filter(category__name="Женский")
+    blog = Blog.objects.all()[:2]
 
     context = {
         "list": products,
         "cat": "female",
         "cart": cart,
+        "blog": blog,
     }
     return render(request, 'store/categories.html', context=context)
 
@@ -69,11 +77,13 @@ def shopMale(request):
     role = user.roles
     cart = Cart(request)
     products = Product.objects.filter(category__name="Мужской")
+    blog = Blog.objects.all()[:2]
 
     context = {
         "list": products,
         "cat": "muj",
         "cart": cart,
+        "blog": blog,
     }
     return render(request, 'store/categories.html', context=context)
 
@@ -86,6 +96,7 @@ def product(request, id):
     list = Product.objects.filter(category=product.category)
     cart_product_form = CartAddProductForm()
     cart = Cart(request)
+    blog = Blog.objects.all()[:2]
 
     context = {
         "product": product,
@@ -93,6 +104,7 @@ def product(request, id):
         "cart_product_form": cart_product_form,
         "cat": "all",
         "cart": cart,
+        "blog": blog,
     }
     return render(request, 'store/product.html', context=context)
 
@@ -101,8 +113,12 @@ def blog(request):
     user = request.user
     role = user.roles
     cart = Cart(request)
+    blog = Blog.objects.all()
+
     context = {
-        'cart': cart
+        'cart': cart,
+        "blogs": blog,
+        "blog": blog[:2],
     }
     return render(request, 'store/blog.html', context=context)
 
@@ -113,9 +129,12 @@ def orders(request):
 
     cart = Cart(request)
     order = Order.objects.filter(user=user).order_by('-pk')
+    blog = Blog.objects.all()[:2]
+
     context = {
         'order': order,
-        'cart': cart
+        'cart': cart,
+        "blog": blog,
     }
     return render(request, 'store/Orders.html', context=context)
 
@@ -126,9 +145,12 @@ def detail(request, id):
     cart = Cart(request)
     order = Order.objects.get(id=id)
     detail = OrderDetail.objects.filter(order=order)
+    blog = Blog.objects.all()[:2]
+
     context = {
         'order': order,
         'detail': detail,
-        'cart': cart
+        'cart': cart,
+        "blog": blog,
     }
     return render(request, 'store/orderdetail.html', context=context)

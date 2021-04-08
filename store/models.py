@@ -69,3 +69,13 @@ class OrderDetail(models.Model):
 
     def __str__(self):
         return self.order.user.name + " " + self.product.name
+
+
+class Blog(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+    creat_at = models.DateField(auto_now_add=True)
+    description = models.TextField()
+    img = models.ImageField(upload_to='images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
