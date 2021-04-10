@@ -76,16 +76,17 @@ def register(request):
         if pass1 != pass2:
             context["message"] = "пароли не совпадают"
             return render(request, 'account/register.html', context=context)
-        user_form = UserForm(request.POST, request.FILES)
-        if user_form.is_valid():
-            instance = user_form.save(commit=False)
-            instance.save()
-            otp = EmailToken.create_otp_for_number(email)
-            return redirect('code', pk=instance.pk)
+        # user_form = UserForm(request.POST, request.FILES)
+        instance = User.objects.create(email=email, name=name,surname=sname, icon=img.get('img'), phone=phone, is_active=True, is_staff=True)
+        instance.set_password(pass1)
+        instance.save()
+        otp = EmailToken.create_otp_for_number(email)
 
-            return redirect("/account")
-        else:
-            return render(request, 'account/login.html', context={"message": "Error"})
+        return redirect('code', pk=instance.pk)
+        # else:
+        #     print(user_form.errors)
+        #     context["message"] = user_form
+        #     return render(request, 'account/register.html', context=context)
     return render(request, 'account/register.html')
 
 
