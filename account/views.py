@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
 from account.forms import UserForm
@@ -34,6 +34,11 @@ def logining(request):
         if role.name == 'DELIVERY':
             return redirect('orders')
             return redirect("/")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 
 def register(request):
