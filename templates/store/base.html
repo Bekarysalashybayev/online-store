@@ -76,10 +76,11 @@
 		<nav class="menu_nav">
 			<ul class="menu_mm">
 				<li><a href="/">Главная</a></li>
-				<li><a href="/shop">Магазин</a></li>
-                <li><a href="/order">Мои заказы</a></li>
-                <li><a href="/blog">Блог</a></li>
+				<li><a href="{% url 'shop' %}">Магазин</a></li>
+                <li><a href="{% url 'order' %}">Мои заказы</a></li>
+                <li><a href="{% url 'blog' %}">Блог</a></li>
                 <li><a href="/#contact">Контакты</a></li>
+                <li><a href="{% url 'logout' %}">Выйти</a></li>
 			</ul>
 		</nav>
 		<div class="menu_extra">
@@ -114,6 +115,7 @@
                 <li><a href="/order">Мои заказы<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                 <li><a href="/blog">Блог<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                 <li><a href="#contact">Контакты<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                <li><a href="{% url 'logout' %}">Выйти<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 			</ul>
 		</nav>
 
@@ -122,7 +124,7 @@
 		<div class="cart d-flex flex-row align-items-center justify-content-start">
 			<div class="cart_icon"><a href="{% url 'cart:cart_detail' %}">
 				<img src="../../static/images/bag.png" alt="">
-				<div class="cart_num">2</div>
+				<div class="cart_num">{{ count }}</div>
 			</a></div>
 			<div class="cart_text" style="font-size:14px!important;">корзина</div>
 			<div class="cart_price">{{ cart.get_total_price }} тнг</div>
@@ -196,7 +198,6 @@
 										<li><a href="{% url 'blog' %}">Блог</a></li>
 										<li><a href="#">Работа</a></li>
 										<li><a href="{% url 'shop' %}">Купить</a></li>
-										<li><a href="/blog">Blog</a></li>
 										<li><a href="#">Партнеры</a></li>
 										<li><a href="#">Блоггеры</a></li>
 										<li><a href="#">Помочь</a></li>
@@ -244,7 +245,7 @@
 								<div class="footer_contact_list">
 									<ul>
 										<li class="d-flex flex-row align-items-start justify-content-start"><span>C.</span><div>mSHOP</div></li>
-										<li class="d-flex flex-row align-items-start justify-content-start"><span>A.</span><div>Алматы, тимириязева 57а</div></li>
+										<li class="d-flex flex-row align-items-start justify-content-start"><span>A.</span><div>Нур-султан, Пушкина 11</div></li>
 										<li class="d-flex flex-row align-items-start justify-content-start"><span>T.</span><div>+7 747 777 4747</div></li>
 										<li class="d-flex flex-row align-items-start justify-content-start"><span>E.</span><div>shop@gmail.com</div></li>
 									</ul>

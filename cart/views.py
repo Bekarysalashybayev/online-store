@@ -39,7 +39,7 @@ def cart_detail(request):
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'],
                                                                    'update': True})
-    return render(request, 'store/cart.html', {'cart': cart})
+    return render(request, 'store/cart.html', {'cart': cart, "count": cart.__len__()})
 
 
 def checkout(request):
@@ -63,6 +63,7 @@ def checkout(request):
             "address2": address2,
             "phone": phone,
             'cart': cart,
+            "count": cart.__len__()
         }
 
         if lat == '43.25263391861023' and lng == '76.9166923806056':
@@ -90,4 +91,4 @@ def checkout(request):
 
         return redirect('/order')
 
-    return render(request, 'store/checkout.html', {'cart': cart})
+    return render(request, 'store/checkout.html', {'cart': cart, "count": cart.__len__()})

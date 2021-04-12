@@ -15,7 +15,7 @@ def index(request):
     products = Product.objects.all()
     blog = Blog.objects.all()[:2]
 
-    return render(request, 'store/index.html', context={"role": role, "list": products, "cart": cart, "blog": blog})
+    return render(request, 'store/index.html', context={"role": role, "list": products, "cart": cart, "count":  cart.__len__(), "blog": blog})
 
 
 @login_required(login_url='/account/logining')
@@ -35,6 +35,7 @@ def shop(request):
         "cart_product_form": cart_product_form,
         "cat": "all",
         "cart": cart,
+        "count": cart.__len__(),
         "blog": blog,
     }
     return render(request, 'store/categories.html', context=context)
@@ -53,6 +54,7 @@ def shopOther(request):
         "list": products,
         "cat": "other",
         "cart": cart,
+        "count": cart.__len__(),
         "blog": blog,
     }
     return render(request, 'store/categories.html', context=context)
@@ -70,6 +72,7 @@ def shopFeMale(request):
         "list": products,
         "cat": "female",
         "cart": cart,
+        "count": cart.__len__(),
         "blog": blog,
     }
     return render(request, 'store/categories.html', context=context)
@@ -87,6 +90,7 @@ def shopMale(request):
         "list": products,
         "cat": "muj",
         "cart": cart,
+        "count": cart.__len__(),
         "blog": blog,
     }
     return render(request, 'store/categories.html', context=context)
@@ -109,6 +113,7 @@ def product(request, id):
         "cart_product_form": cart_product_form,
         "cat": "all",
         "cart": cart,
+        "count": cart.__len__(),
         "blog": blog,
     }
     return render(request, 'store/product.html', context=context)
@@ -123,6 +128,7 @@ def blog(request):
 
     context = {
         'cart': cart,
+        "count": cart.__len__(),
         "blogs": blog,
         "blog": blog[:2],
     }
@@ -141,6 +147,7 @@ def orders(request):
     context = {
         'order': order,
         'cart': cart,
+        "count": cart.__len__(),
         "blog": blog,
     }
     return render(request, 'store/Orders.html', context=context)
@@ -159,6 +166,7 @@ def detail(request, id):
         'order': order,
         'detail': detail,
         'cart': cart,
+        "count": cart.__len__(),
         "blog": blog,
     }
     return render(request, 'store/orderdetail.html', context=context)

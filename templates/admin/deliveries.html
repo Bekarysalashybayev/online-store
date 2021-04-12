@@ -11,7 +11,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Мои Продукты</h4>
+                  <h4 class="card-title ">Доставщики</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -53,8 +53,6 @@
                               <img style="height: 35px; width: 45px;" src="/media/{{ l.icon }}" alt="">
                           </td>
                         <td>
-                                    <a href="" class="btn btn-warning"
-                                                           id='{{ l.id }}'>Обновить</a>
                                     <a href="{% url 'delete_delivery' l.id %}"
                                                            class="btn btn-danger confirm-delete"
                                                            data-toggle="modal" data-target="#confirmDeleteModal"
