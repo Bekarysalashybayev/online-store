@@ -113,7 +113,7 @@ def update_user(request, pk):
 
     if request.method == "GET":
         user = User.objects.get(pk=pk)
-        return render(request, 'admin/update-user.html', {'user': user, "action": 'Обновить профиль'})
+        return render(request, 'admin/update-user.html', {'user': user, "action": 'Обновить профиль', 'segment': 'profile'})
     if request.method == "POST":
         name = request.POST.get('name')
         surname = request.POST.get('surname')
@@ -125,6 +125,6 @@ def update_user(request, pk):
         user.surname = surname
         user.phone = phone
         if img:
-            user.img = img
+            user.icon = img
         user.save()
         return redirect('profile')
