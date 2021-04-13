@@ -107,3 +107,24 @@ def code(request, pk):
             return redirect("/account/logining")
 
     return render(request, 'account/code.html', {'pk': pk})
+
+
+def update_user(request, pk):
+
+    if request.method == "GET":
+        user = User.objects.get(pk=pk)
+        return render(request, 'admin/update-user.html', {'user': user, "action": 'Обновить профиль', 'segment': 'profile'})
+    if request.method == "POST":
+        name = request.POST.get('name')
+        surname = request.POST.get('surname')
+        phone = request.POST.get('phone')
+        img = request.FILES.get('icon')
+
+        user = User.objects.get(pk=pk)
+        user.name = name
+        user.surname = surname
+        user.phone = phone
+        if img:
+            user.icon = img
+        user.save()
+        return redirect('profile')

@@ -107,10 +107,41 @@ def admin_deliveries(request):
     return render(request, 'admin/deliveries.html', {'list': users, 'segment': 'delivery'})
 
 
+def admin_update_deliveries(request, pk):
+    if request.method == "GET":
+        user = User.objects.get(pk=pk)
+        name = user.name
+        sname = user.surname
+        email = user.email
+        phone = user.phone
+        icon = user.icon
+        return render(request, 'admin/add-delivery.html', {
+            'name': name, 'icon': icon, 'sname': sname, 'email_2': email, 'phone': phone, 'segment': 'delivery',
+            'action': 'Обновить доставщика'})
+
+    if request.method == "POST":
+        name = request.POST['name']
+        surname = request.POST['surname']
+        password = request.POST['password']
+        phone = request.POST['phone']
+        img = request.FILES.get('icon')
+        user = User.objects.get(pk=pk)
+        user.name = name
+        user.surname = surname
+        if password:
+            user.set_password(password)
+        user.phone = phone
+        if img:
+            user.icon = img
+        user.save()
+
+        return redirect('deliveries_list')
+
+
 @login_required(login_url='/account/logining')
 def admin_add_deliveries(request):
     if request.method == "GET":
-        return render(request, 'admin/add-delivery.html', {'segment': 'delivery'})
+        return render(request, 'admin/add-delivery.html', {'segment': 'delivery', 'action': "Добавить доставщика"})
 
     if request.method == "POST":
         name = request.POST['name']

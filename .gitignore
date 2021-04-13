@@ -26,7 +26,8 @@
 #
 #### Python ###
 ## Byte-compiled / optimized / DLL files
-#__pycache__/
+*/__pycache__
+*.pyc
 #*.py[cod]
 #
 ## C extensions
@@ -82,7 +83,7 @@
 #*.log
 #*.pot
 #*.pyc
-#__pycache__/
+/__pycache__/
 #local_settings.py
 #
 #.env

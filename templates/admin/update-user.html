@@ -15,64 +15,46 @@
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-
-                      <form  method="POST" enctype="multipart/form-data">
+                      <form method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
-                          <div class="row" style="margin: 0">
-                              <div class="col-md-12">
-                                  <div class="text" style="color: #ba2121; margin-left: 10px;">{{ message }}</div>
-                              </div>
-                          </div>
-                          <br>
                         <div class="row" style="margin: 0">
                     <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
                         <div class="col-md-4">
+                        <lable>Email</lable>
+                        <input type="text" class="form-control" name="name" value="{{ user.email }}" placeholder="Email" disabled required>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
+                        <div class="col-md-4">
                         <lable>Имя</lable>
-                        <input type="text" class="form-control" name="name" value="{{ name }}" placeholder="Имя" required>
+                        <input type="text" class="form-control" name="name" value="{{ user.name }}" placeholder="Имя" required>
                         </div>
                     </div>
                     <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
                         <div class="col-md-4">
-                        <lable>Фамилия</lable>
-                        <input type="text" class="form-control" name="surname" value="{{ sname }}" placeholder="фамилия" required>
+                            <lable>Фамиля</lable>
+                            <input type="text" class="form-control" name="surname" value="{{ user.surname }}" placeholder="Фамиля" required>
                         </div>
                     </div>
                     <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
                         <div class="col-md-4">
-                            <lable>Email</lable>
-                            {% if email_2 %}
-                                <input type="text" class="form-control" name="email" value="{{ email_2 }}"  disabled placeholder="почта">
-                            {% else %}
-                                <input type="text" class="form-control" name="email" value="{{ email }}" placeholder="почта" required>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
-                        <div class="col-md-4">
-                            <lable>Пароль</lable>
-                            <input type="text" class="form-control" name="password" value="" placeholder="пароль" >
-                        </div>
-                    </div>
-                    <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
-                        <div class="col-md-4">
-                            <lable>Номер</lable>
-                            <input type="text" class="form-control" name="phone" value="{{ phone }}" placeholder="номер телефона" required>
+                        <lable> Телефон номер</lable>
+                        <input type="text" class="form-control" name="phone" value="{{ user.phone }}" placeholder="Телефон номер" required>
                         </div>
                     </div>
                     <div class="col-md-3" style="padding: 20px">
-                       {% if icon %}
-                           <img style="height: 60px; width: 60px" src="/media/{{ icon }}" alt="">
+                       {% if user.icon %}
+                           <img style="height: 60px; width: 60px" src="/media/{{ user.icon }}" alt="">
                             <input type="file" name="icon" >
                         {% else %}
                             <lable>Фотография</lable>
                             <input type="file" name="icon" required >
                         {% endif %}
                     </div>
-                        </div>
-
-                    <div style="position: relative;">
+                  </div>
+                  <div style="position: relative;">
                         <input class="btn btn-danger" type="submit" value="Сохранить" style="position: absolute; right: 50px;">
-                     </div>
+                  </div>
                           <br>
                           <br>
                       </form>
