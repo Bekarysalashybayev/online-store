@@ -8,55 +8,103 @@
 {% block content %}
 
         <div class="row">
+
             <div class="col-md-12">
             <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title "><a  href="{% url 'order_list_admin' %}"><- Заказы</a></h4>
                 </div>
                 <div class="container" style="margin: 40px">
-        <h5><b>Данные заказа</b></h5>
-        <hr>
-        <p class="order"><b>Адрес:</b> {{ order.address1 }}, {{ order.address2 }}</p>
-        <p class="order"><b>Номер телефона:</b> {{ order.phone }}</p>
-        <p class="order"><b>Сумма заказа:</b> {{ order.total }} тнг</p>
-        <p class="order"><b>Статус заказа:</b> {{ order.status }}</p>
-        <hr>
-    {% if order.delivery %}
-        <h5><b>Доставщик</b></h5>
-        <hr>
-        <p class="order"><b>Имя:</b> {{ order.delivery.name }}</p>
-        <p class="order"><b>Контактные данные:</b>  <a href="tel:{{ order.delivery.phone }}">{{ order.delivery.phone }}</a></p>
-        <hr>
-    {% endif %}
-        <br>
-        <h5><b>Товары</b></h5>
-        <br>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Название</th>
-            <th>Цена</th>
-            <th>Количество</th>
-            <th>Сумма</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for l in list %}
-          <tr>
-            <td>{{ l.product.name }}</td>
-            <td>{{ l.price }}</td>
-            <td>{{ l.count }} </td>
-            <td>{{ l.total_price }}тнг</td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5><b>Данные заказа</b></h5>
+                            <hr>
+                            <p class="order"><b>Адрес:</b> {{ order.address1 }}, {{ order.address2 }}</p>
+                            <p class="order"><b>Номер телефона:</b> {{ order.phone }}</p>
+                            <p class="order"><b>Сумма заказа:</b> {{ order.total }} тнг</p>
+                            <p class="order"><b>Статус заказа:</b> {{ order.status }}</p>
+                            <hr>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="container">
+                                <div style="display: none">
+                                  <label>
+                                    lat
+                                    <input type="text" id="lat" name="lat" value="{{ order.lat }}"/>
+                                  </label>
+                                  <label>
+                                    lng
+                                    <input type="text" id="lng" name="lng" value="{{ order.lng }}"/>
+                                  </label>
+                                </div>
+                                <div style="color: #ba2121">
+                                    {{ error }}
+                                </div>
+                                <div id="map" style="height: 400px;">
 
-            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-
+                    {% if order.delivery %}
+                        <h5><b>Доставщик</b></h5>
+                        <hr>
+                        <p class="order"><b>Имя:</b> {{ order.delivery.name }}</p>
+                        <p class="order"><b>Контактные данные:</b>  <a href="tel:{{ order.delivery.phone }}">{{ order.delivery.phone }}</a></p>
+                        <hr>
+                    {% endif %}
+                        <br>
+                        <h5><b>Товары</b></h5>
+                        <br>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Название</th>
+                            <th>Цена</th>
+                            <th>Количество</th>
+                            <th>Сумма</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for l in list %}
+                          <tr>
+                            <td>{{ l.product.name }}</td>
+                            <td>{{ l.price }}</td>
+                            <td>{{ l.count }} </td>
+                            <td>{{ l.total_price }}тнг</td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
             </div>
         </div>
+    </div>
 {% endblock content %}
 
+{% block javascripts %}
+    <script>
+
+    function initMap() {
+        let l1 = parseFloat(document.getElementById('lat').value);
+        let l2 = parseFloat(document.getElementById('lng').value);
+      const myLatLng = { lat: l1, lng: l2 };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: myLatLng,
+      });
+      new google.maps.Marker({
+        position: myLatLng,
+        map,
+        title: "Hello World!",
+      });
+    }
+
+
+    </script>
+     <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_zq8oIH5flWJZ3Vb0uAjZDxZPTFjdI8&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+{% endblock javascripts %}

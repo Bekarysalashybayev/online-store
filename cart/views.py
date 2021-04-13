@@ -66,7 +66,7 @@ def checkout(request):
             "count": cart.__len__()
         }
 
-        if lat == '43.25263391861023' and lng == '76.9166923806056':
+        if lat == '51.176461847963516' and lng == '71.40863847220683':
             context['error'] = 'Подтвердите адрес из карты'
             return render(request, 'store/checkout.html', context=context)
 
