@@ -1,18 +1,18 @@
 {% extends "delivery/layouts/base.html" %}
 
-{% block title %} UI Tables {% endblock %}
+{% block title %} Өнім {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-        <a class="btn" href="{% url 'add_product' %}">Добавить продукта</a>
+        <a class="btn" href="{% url 'add_product' %}">Өнімді қосыңыз</a>
 
         <div class="row">
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Мои Продукты</h4>
+                  <h4 class="card-title ">Өнімдер</h4>
 {#                  <p class="card-category"> Здесь все заказы, которые необходимо доставить</p>#}
                 </div>
                 <div class="card-body">
@@ -20,13 +20,13 @@
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          Название
+                          Аты
                         </th>
                         <th>
-                          Цена
+                          Бағасы
                         </th>
                         <th>
-                          Описание
+                          Сипаттама
                         </th>
                          <th>
                           Статус
@@ -50,7 +50,7 @@
                           Фото5
                         </th>
                         <th>
-                          Операции
+                          Операциялар
                         </th>
                       </thead>
                       <tbody>
@@ -123,11 +123,11 @@
                           </td>
                         <td>
                             <a href="{% url 'update_product' l.id %}" class="btn btn-warning"
-                                                   id='{{ l.id }}'>Обновить</a>
+                                                   id='{{ l.id }}'>Жаңарту</a>
                             <a href="{% url 'delete_product' l.id %}"
                                                    class="btn btn-danger confirm-delete"
                                                    data-toggle="modal" data-target="#confirmDeleteModal"
-                                                   id='deleteButton{{ l.id }}'>Удалить</a>
+                                                   id='deleteButton{{ l.id }}'>Жою</a>
                         </td>
                         </tr>
                       {% endfor  %}
@@ -142,13 +142,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body confirm-delete">
-                        Вы точно хотите удалить?
+                        Жойғыңыз келетініне сенімдісіз бе?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Бас тарту
                         </button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                id="confirmDeleteButtonModal">Удалить
+                                id="confirmDeleteButtonModal">Жою
                         </button>
                     </div>
                 </div>

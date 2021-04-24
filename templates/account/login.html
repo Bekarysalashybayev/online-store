@@ -290,14 +290,14 @@ input[type=text]::placeholder, input[type=password]::placeholder {
                 <br>
             {% endif %}
             {% csrf_token %}
-          <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
-          <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-          <input type="submit" class="fadeIn fourth" value="Log In">
+          <input type="text" id="login" class="fadeIn second" name="username" placeholder="пайдаланушы аты">
+          <input type="password" id="password" class="fadeIn third" name="password" placeholder="пароль">
+          <input type="submit" class="fadeIn fourth" value="Кіру">
         </form>
 
         <!-- Remind Passowrd -->
         <div id="formFooter">
-          <a class="underlineHover" href="{% url 'register' %}">Регистрация</a>
+          <a class="underlineHover" href="{% url 'register' %}">Тіркеу</a>
         </div>
 
       </div>

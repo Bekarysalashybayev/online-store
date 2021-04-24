@@ -1,6 +1,6 @@
 {% extends "delivery/layouts/base.html" %}
 
-{% block title %} UI Tables {% endblock %}
+{% block title %} Тапсырыстар {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -11,20 +11,20 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Заказы</h4>
+                  <h4 class="card-title ">Тапсырыстар</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          Получатель
+                          Алушы
                         </th>
                         <th>
-                          Куда
+                          Қайда
                         </th>
                         <th>
-                          Общая цена
+                          Жалпы бағасы
                         </th>
                          <th>
                           Номер
@@ -33,7 +33,10 @@
                           Статус
                         </th>
                         <th>
-                          Доставщик
+                          Жеткізуші
+                        </th>
+                       <th>
+                          Пайдалану
                         </th>
 
                       </thead>
@@ -59,7 +62,7 @@
                               {{ l.delivery.name }} {{ l.delivery.surname }}
                           </td>
                             <td>
-                                <a href="{% url 'order_detail_list' l.id %}" class="btn btn-danger confirm-delete"> Детали</a>
+                                <a href="{% url 'order_detail_list' l.id %}" class="btn btn-danger confirm-delete"> Тапсырыстың мәліметтері</a>
                           </td>
                         </tr>
                       {% endfor  %}

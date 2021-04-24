@@ -1,6 +1,6 @@
 {% extends "delivery/layouts/base.html" %}
 
-{% block title %} Добавление продуктов  {% endblock %}
+{% block title %} Өнімдерді қосу  {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -20,13 +20,13 @@
                         <div class="row" style="margin: 0">
                     <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
                         <div class="col-md-4">
-                        <lable>Название</lable>
+                        <lable>Аты</lable>
                         <input type="text" class="form-control" name="name" value="{{ product.name }}" placeholder="Название" required>
                         </div>
                     </div>
                     <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
                         <div class="col-md-4">
-                        <lable>Цена</lable>
+                        <lable>Бағасы</lable>
                         <input type="number" class="form-control" name="price" value="{{ product.price }}" placeholder="цена" required>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-md-12" style="padding-left: 0;padding-top: 30px; padding-bottom: 30px ">
                         <div class="col-md-4">
-                        <lable>Описание</lable>
+                        <lable>Сипаттама</lable>
                             <textarea  class="form-control" name="description" value="" rows="5" placeholder="Описание" required>{{ product.description }}</textarea>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                     </div>
                   </div>
                   <div style="position: relative;">
-                        <input class="btn btn-danger" type="submit" value="Сохранить" style="position: absolute; right: 50px;">
+                        <input class="btn btn-danger" type="submit" value="Сақтау" style="position: absolute; right: 50px;">
                   </div>
                           <br>
                           <br>

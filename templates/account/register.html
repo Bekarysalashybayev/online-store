@@ -15,7 +15,7 @@
         <div class="col-12 col-md-8 col-lg-8 col-xl-6">
           <div class="row">
             <div class="col text-center">
-              <h1>Register</h1>
+              <h1>Тіркелу</h1>
               <p class="text-h3"></p>
                 <p class="text-h3" style="color: red">{{ message }}</p>
                 </div>
@@ -24,22 +24,22 @@
                 {% csrf_token %}
                   <div class="row align-items-center">
                     <div class="col mt-4">
-                      <input type="text" class="form-control" name="name" value="{{ name }}" placeholder="Имя*" required>
+                      <input type="text" class="form-control" name="name" value="{{ name }}" placeholder="Аты-жөні*" required>
                     </div>
                   </div>
                   <div class="row align-items-center mt-4">
                     <div class="col">
-                      <input type="text" class="form-control" name="surname" value="{{ sname }}" placeholder="Фамилия*" required>
+                      <input type="text" class="form-control" name="surname" value="{{ sname }}" placeholder="Тегі*" required>
                     </div>
                   </div>
                   <div class="row align-items-center mt-4">
                     <div class="col">
-                      <input type="email" class="form-control" name="email" value="{{ email }}" placeholder="Почта*" required>
+                      <input type="email" class="form-control" name="email" value="{{ email }}" placeholder="пошта*" required>
                     </div>
                   </div>
                 <div class="row align-items-center mt-4">
                     <div class="col">
-                      <input type="text" class="form-control" name="phone" value="{{ phone }}" placeholder="Номер телефона" required>
+                      <input type="text" class="form-control" name="phone" value="{{ phone }}" placeholder="Телефон нөмірі" required>
                     </div>
                   </div>
                     <div class="row align-items-center mt-4">
@@ -52,20 +52,20 @@
                   </div>
                   <div class="row align-items-center mt-4">
                         <div class="col">
-                             <input type="password" name="password1" class="form-control" value="{{ pass1 }}" placeholder="Password" required>
+                             <input type="password" name="password1" class="form-control" value="{{ pass1 }}" placeholder="Пароль" required>
                         </div>
                         <div class="col">
-                            <input type="password" name="password2" class="form-control" value="{{ pass2 }}" placeholder="Confirm Password">
+                            <input type="password" name="password2" class="form-control" value="{{ pass2 }}" placeholder="Құпия сөзді Растау">
                         </div>
                   </div>
 
-                  <button type="submit" class="btn btn-primary mt-4">Регистрация</button>
+                  <button type="submit" class="btn btn-primary mt-4">Тіркеу</button>
 
 
             </form>
             <!-- Remind Passowrd -->
                 <div id="formFooter" style="margin: 50px auto 0; text-align: center; background-color: #b0bec5; font-size: 20px;">
-                  <a class="underlineHover" href="{% url 'login' %}">Логин</a>
+                  <a class="underlineHover" href="{% url 'login' %}">Кіру</a>
                 </div>
             </div>
           </div>

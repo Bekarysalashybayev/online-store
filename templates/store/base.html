@@ -36,11 +36,11 @@
 			<!-- Navigation -->
 			<nav class="header_nav">
 				<ul class="d-flex flex-row align-items-center justify-content-start">
-					<li><a href="/">Главная</a></li>
-					<li><a href="/shop">Магазин</a></li>
-                    <li><a href="/order">Мои заказы</a></li>
+					<li><a href="/">Басты бет</a></li>
+					<li><a href="/shop">Дүкен</a></li>
+                    <li><a href="/order">Менің тапсырыстарым</a></li>
                     <li><a href="/blog">Блог</a></li>
-                    <li><a href="/#contact">Контакты</a></li>
+                    <li><a href="/#contact">Байланыс</a></li>
 				</ul>
 			</nav>
 
@@ -75,12 +75,12 @@
 
 		<nav class="menu_nav">
 			<ul class="menu_mm">
-				<li><a href="/">Главная</a></li>
-				<li><a href="{% url 'shop' %}">Магазин</a></li>
-                <li><a href="{% url 'order' %}">Мои заказы</a></li>
+				<li><a href="/">Басты бет</a></li>
+				<li><a href="{% url 'shop' %}">Дүкен</a></li>
+                <li><a href="{% url 'order' %}">Менің тапсырыстарым</a></li>
                 <li><a href="{% url 'blog' %}">Блог</a></li>
-                <li><a href="/#contact">Контакты</a></li>
-                <li><a href="{% url 'logout' %}">Выйти</a></li>
+                <li><a href="/#contact">Байланыс</a></li>
+                <li><a href="{% url 'logout' %}">Шығу</a></li>
 			</ul>
 		</nav>
 		<div class="menu_extra">
@@ -110,12 +110,12 @@
 		<!-- Sidebar Navigation -->
 		<nav class="sidebar_nav">
 			<ul>
-                <li><a href="/">Главная<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                <li><a href="/shop">Магазин<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                <li><a href="/order">Мои заказы<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                <li><a href="/">Басты бет<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                <li><a href="/shop">Дүкен<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                <li><a href="/order">Менің тапсырыстарым<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                 <li><a href="/blog">Блог<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                <li><a href="#contact">Контакты<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                <li><a href="{% url 'logout' %}">Выйти<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                <li><a href="#contact">Байланыс<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                <li><a href="{% url 'logout' %}">Шығу<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 			</ul>
 		</nav>
 
@@ -126,7 +126,7 @@
 				<img src="../../static/images/bag.png" alt="">
 				<div class="cart_num">{{ count }}</div>
 			</a></div>
-			<div class="cart_text" style="font-size:14px!important;">корзина</div>
+			<div class="cart_text" style="font-size:14px!important;">Кәрзеңке</div>
 			<div class="cart_price">{{ cart.get_total_price }} тнг</div>
 		</div>
 	</div>
@@ -141,13 +141,13 @@
 				<div class="col-lg-8 offset-lg-2">
 					<div class="newsletter_content text-center">
 						<div class="newsletter_title_container">
-							<div class="newsletter_title">ПОДПИШИТЕСЬ НА НАШУ РАССЫЛКУ</div>
-							<div class="newsletter_subtitle">мы не будем спамить, обещаем!</div>
+							<div class="newsletter_title">Біздің жаңалықтарға жазылыңыз</div>
+							<div class="newsletter_subtitle">біз спам жібермейміз, уәде береміз!</div>
 						</div>
 						<div class="newsletter_form_container">
 							<form action="#" id="newsletter_form" class="newsletter_form">
 								<input type="email" class="newsletter_input" placeholder="ваша электронная почта здесь" required="required">
-								<button class="newsletter_button">Отправить</button>
+								<button class="newsletter_button">Жіберу</button>
 							</form>
 						</div>
 					</div>
@@ -190,17 +190,17 @@
 						<!-- Questions -->
 						<div class="col-xxl-3 col-md-6 footer_col">
 							<div class="footer_questions">
-								<div class="footer_title">вопросы</div>
+								<div class="footer_title">сұрақтар</div>
 								<div class="footer_list">
 									<ul>
-										<li><a href="#">О нас</a></li>
-										<li><a href="{% url 'order' %}">Заказы</a></li>
+										<li><a href="#">Біз туралы</a></li>
+										<li><a href="{% url 'order' %}">Тапсырыстар</a></li>
 										<li><a href="{% url 'blog' %}">Блог</a></li>
-										<li><a href="#">Работа</a></li>
-										<li><a href="{% url 'shop' %}">Купить</a></li>
-										<li><a href="#">Партнеры</a></li>
-										<li><a href="#">Блоггеры</a></li>
-										<li><a href="#">Помочь</a></li>
+										<li><a href="#">Жұмыс</a></li>
+										<li><a href="{% url 'shop' %}">Сатып алу</a></li>
+										<li><a href="#">Серіктестер</a></li>
+										<li><a href="#">Блогерлер</a></li>
+										<li><a href="#">Көмек</a></li>
 									</ul>
 								</div>
 							</div>
@@ -219,7 +219,7 @@
 										<div class="footer_blog_content">
 											<div class="footer_blog_title"><a href="blog.html">{{ b.name}}</a></div>
 											<div class="footer_blog_date">{{ b.creat_at}}</div>
-											<div class="footer_blog_link"><a href="{% url 'blog' %}">Читать больше</a></div>
+											<div class="footer_blog_link"><a href="{% url 'blog' %}">Ары қарай оқу</a></div>
 										</div>
 									</div>
                                     {% endfor %}
@@ -241,7 +241,7 @@
 						<!-- Contact -->
 						<div class="col-xxl-3 col-md-6 footer_col">
 							<div class="footer_contact" id="contact">
-								<div class="footer_title">Контакты</div>
+								<div class="footer_title">Байланыс</div>
 								<div class="footer_contact_list">
 									<ul>
 										<li class="d-flex flex-row align-items-start justify-content-start"><span>C.</span><div>mSHOP</div></li>

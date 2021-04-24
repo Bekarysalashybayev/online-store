@@ -3,8 +3,8 @@
         <a target="_blank" rel="noopener noreferrer" 
            target="_blank" rel="noopener noreferrer" 
            href="https://www.creative-tim.com/product/material-dashboard-django" class="simple-text logo-normal">
-          Админ панель <br>
-            Доставщика
+          Әкімші панелі <br>
+            Жеткізу
         </a>
       </div>
       {% if user.is_authenticated %}
@@ -26,13 +26,13 @@
           <li class="nav-item {% if 'del' == segment %} active {% endif %}">
             <a class="nav-link" href="{% url 'orders' %}">
               <i class="material-icons">content_paste</i>
-              <p>Заказы</p>
+              <p>Тапсырыстар</p>
             </a>
           </li>
           <li class="nav-item {% if 'myorders' in segment %} active {% endif %}">
             <a class="nav-link" href="{% url 'myorders' %}">
               <i class="material-icons">content_paste</i>
-              <p>Мои Заказы</p>
+              <p>Менің тапсырыстарым</p>
             </a>
           </li>
             {% endif %}
@@ -41,14 +41,14 @@
 
             <a class="nav-link" href="{% url 'admin_products' %}">
               <i class="material-icons">content_paste</i>
-              <p>Продукты</p>
+              <p>Өнімдер</p>
             </a>
           </li>
             <li class="nav-item {% if 'delivery' in segment %} active {% endif %}">
 
             <a class="nav-link" href="{% url 'deliveries_list' %}">
               <i class="material-icons">content_paste</i>
-              <p>Доставщики</p>
+              <p>Жеткізу</p>
             </a>
           </li>
           <li class="nav-item {% if 'blog' in segment %} active {% endif %}">
@@ -61,7 +61,7 @@
             <li class="nav-item {% if 'order' in segment %} active {% endif %}">
             <a class="nav-link" href="{% url 'order_list_admin' %}">
               <i class="material-icons">content_paste</i>
-              <p>Заказы</p>
+              <p>Тапсырыстар</p>
             </a>
           </li>
             {% endif %}
@@ -76,7 +76,7 @@
           <li class="nav-item ">
             <a class="nav-link" href="{% url 'logout' %}" >
               <i class="material-icons">directions_run</i>
-              <p>Выйти</p>
+              <p>Шығу</p>
             </a>
           </li>
 

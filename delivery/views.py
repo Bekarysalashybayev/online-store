@@ -117,7 +117,7 @@ def admin_update_deliveries(request, pk):
         icon = user.icon
         return render(request, 'admin/add-delivery.html', {
             'name': name, 'icon': icon, 'sname': sname, 'email_2': email, 'phone': phone, 'segment': 'delivery',
-            'action': 'Обновить доставщика'})
+            'action': 'Жаңарту'})
 
     if request.method == "POST":
         name = request.POST['name']
@@ -141,7 +141,7 @@ def admin_update_deliveries(request, pk):
 @login_required(login_url='/account/logining')
 def admin_add_deliveries(request):
     if request.method == "GET":
-        return render(request, 'admin/add-delivery.html', {'segment': 'delivery', 'action': "Добавить доставщика"})
+        return render(request, 'admin/add-delivery.html', {'segment': 'delivery', 'action': "Жеткізетін адамды қосыңыз"})
 
     if request.method == "POST":
         name = request.POST['name']

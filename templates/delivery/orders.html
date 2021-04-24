@@ -1,6 +1,6 @@
 {% extends "delivery/layouts/base.html" %}
 
-{% block title %} Заказы {% endblock %}
+{% block title %} Тапсырыстар {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -11,24 +11,24 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Все заказы</h4>
-                  <p class="card-category"> Здесь все заказы, которые необходимо доставить</p>
+                  <h4 class="card-title ">Барлық тапсырыстар</h4>
+                  <p class="card-category"> Мұнда жеткізу керек барлық тапсырыстар</p>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          Адрес
+                          Мекен-жай
                         </th>
                         <th>
-                          Номер телефона
+                          Телефон нөмірі
                         </th>
                         <th>
-                          Сумма заказа
+                          Тапсырыс бағасы
                         </th>
                         <th>
-                          Операции
+                          Операциялар
                         </th>
                       </thead>
                       <tbody>
@@ -47,7 +47,7 @@
                               <a href="{% url 'getorders' l.id %}"
                                                            class="btn btn-danger confirm-delete"
                                                            data-toggle="modal" data-target="#confirmDeleteModal"
-                                                           id='deleteButton{{ l.id }}'>Получить</a>
+                                                           id='deleteButton{{ l.id }}'>Қабылдау</a>
                           </td>
                         </tr>
                       {% endfor  %}
@@ -62,13 +62,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body confirm-delete">
-                        Вы точно хотите получить этот заказ?
+                       Осы тапсырысты алғыңыз келетініне сенімдісіз бе?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Бас тарту
                         </button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                id="confirmDeleteButtonModal">Подтвердить
+                                id="confirmDeleteButtonModal">Растаңыз
                         </button>
                     </div>
                 </div>

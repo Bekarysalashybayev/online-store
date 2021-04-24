@@ -12,7 +12,7 @@
               <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title">Профиль</h4>
-                  <p class="card-category">Данные</p>
+                  <p class="card-category">Деректер</p>
                 </div>
                 <div class="card-body">
                   <form>
@@ -33,25 +33,25 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Имя</label>
+                          <label class="bmd-label-floating">Аты</label>
                           <input type="text" class="form-control" value="{{ user.name }}" disabled>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Фамилия</label>
+                          <label class="bmd-label-floating">Тегі</label>
                           <input type="text" class="form-control" value="{{ user.surname }}" disabled>
                         </div>
                       </div>
                         <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating"> Телефон номер</label>
+                          <label class="bmd-label-floating"> Телефон нөмірі</label>
                           <input type="text" class="form-control" value="{{ user.phone }}" disabled>
                         </div>
                       </div>
                     </div>
                     <div class="clearfix">
-                        <a href="{% url 'user_update_panel' user.id %}" class="btn btn-warning" id='{{ user.id }}'>Обновить</a>
+                        <a href="{% url 'user_update_panel' user.id %}" class="btn btn-warning" id='{{ user.id }}'>Жаңарту</a>
                     </div>
                   </form>
                 </div>
@@ -74,7 +74,7 @@
                   <p class="card-description">
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet assumenda ducimus fugiat, illo incidunt mollitia officia perferendis quisquam repellat. Beatae culpa deserunt dicta eum eveniet id impedit laboriosam laborum quasi?25
                   </p>
-                  <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                  <a href="#pablo" class="btn btn-primary btn-round">Іздеу</a>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 {% extends "delivery/layouts/base.html" %}
 
-{% block title %} Мои заказы {% endblock %}
+{% block title %} Менің тапсырыстарым {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -11,27 +11,27 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Мои заказы</h4>
-                  <p class="card-category"> Здесь все заказы, которые необходимо доставить</p>
+                  <h4 class="card-title ">Менің тапсырыстарым</h4>
+                  <p class="card-category"> Мұнда жеткізу керек барлық тапсырыстар</p>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          Адрес
+                          Мекен-жай
                         </th>
                         <th>
-                          Номер телефона
+                          Телефон нөмірі
                         </th>
                         <th>
-                          Сумма заказа
+                          Тапсырыс бағасы
                         </th>
                          <th>
                           Статус
                         </th>
                         <th>
-                          Операции
+                          Операциялар
                         </th>
                       </thead>
                       <tbody>
@@ -54,18 +54,18 @@
                               {{ l.status }}
                           </td>
                           <td class="text-primary" style="
-                                    {% if 'Завершен' in l.status.name %}
+                                    {% if 'Аяқталды' in l.status.name %}
                                         background-color: #cceb6d;
                                         text-align: center;
                                     {% endif %}">
-                              {% if 'Доставщик подтвердил' in l.status.name %}
+                              {% if 'Жеткізу расталды' in l.status.name %}
                                 <a href="{% url 'deliveryorders' l.id %}" class="btn btn-danger confirm-delete"
                                                            data-toggle="modal" data-target="#confirmDeleteModal"
-                                                           id='deleteButton{{ l.id }}'>Доставить</a>
-                              {% elif  'Доставка осуществляется' in l.status.name%}
-                                  <a href="{% url 'deliveryorders' l.id %}" class="btn btn-danger confirm-delete">Посмотреть</a>
+                                                           id='deleteButton{{ l.id }}'>Жеткізу</a>
+                              {% elif  'Жеткізу жүзеге асырылып жатыр' in l.status.name%}
+                                  <a href="{% url 'deliveryorders' l.id %}" class="btn btn-danger confirm-delete">Қараңыз</a>
                                {% else %}
-
+                                  Аяқталды
                               {% endif %}
                           </td>
                         </tr>
@@ -81,13 +81,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body confirm-delete">
-                        Доставите сейчас?
+                        Сіз қазір жеткізесіз бе?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Бас тарту
                         </button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                id="confirmDeleteButtonModal">Подтвердить
+                                id="confirmDeleteButtonModal">Растаңыз
                         </button>
                     </div>
                 </div>

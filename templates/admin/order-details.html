@@ -1,6 +1,6 @@
 {% extends "delivery/layouts/base.html" %}
 
-{% block title %} UI Tables {% endblock %}
+{% block title %} Тапсырыстар {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -12,17 +12,17 @@
             <div class="col-md-12">
             <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title "><a  href="{% url 'order_list_admin' %}"><- Заказы</a></h4>
+                  <h4 class="card-title "><a  href="{% url 'order_list_admin' %}"><- Тапсырыстар</a></h4>
                 </div>
                 <div class="container" style="margin: 40px">
                     <div class="row">
                         <div class="col-md-6">
-                            <h5><b>Данные заказа</b></h5>
+                            <h5><b>Тапсырыс деректері</b></h5>
                             <hr>
-                            <p class="order"><b>Адрес:</b> {{ order.address1 }}, {{ order.address2 }}</p>
-                            <p class="order"><b>Номер телефона:</b> {{ order.phone }}</p>
-                            <p class="order"><b>Сумма заказа:</b> {{ order.total }} тнг</p>
-                            <p class="order"><b>Статус заказа:</b> {{ order.status }}</p>
+                            <p class="order"><b>Мекен-жай:</b> {{ order.address1 }}, {{ order.address2 }}</p>
+                            <p class="order"><b>Телефон нөмірі:</b> {{ order.phone }}</p>
+                            <p class="order"><b>Тапсырыс бағасы:</b> {{ order.total }} тнг</p>
+                            <p class="order"><b>Тапсырыс статусы:</b> {{ order.status }}</p>
                             <hr>
                         </div>
                         <div class="col-md-6">
@@ -48,22 +48,22 @@
                     </div>
 
                     {% if order.delivery %}
-                        <h5><b>Доставщик</b></h5>
+                        <h5><b>Жеткізуші</b></h5>
                         <hr>
-                        <p class="order"><b>Имя:</b> {{ order.delivery.name }}</p>
-                        <p class="order"><b>Контактные данные:</b>  <a href="tel:{{ order.delivery.phone }}">{{ order.delivery.phone }}</a></p>
+                        <p class="order"><b>Аты:</b> {{ order.delivery.name }}</p>
+                        <p class="order"><b>Байланыс мәліметтері:</b>  <a href="tel:{{ order.delivery.phone }}">{{ order.delivery.phone }}</a></p>
                         <hr>
                     {% endif %}
                         <br>
-                        <h5><b>Товары</b></h5>
+                        <h5><b>Өнімдер</b></h5>
                         <br>
                       <table class="table table-bordered">
                         <thead>
                           <tr>
-                            <th>Название</th>
-                            <th>Цена</th>
-                            <th>Количество</th>
-                            <th>Сумма</th>
+                            <th>Аты</th>
+                            <th>Бағасы</th>
+                            <th>Саны</th>
+                            <th>Жалпы бағасы</th>
                           </tr>
                         </thead>
                         <tbody>

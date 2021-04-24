@@ -201,7 +201,7 @@ def admin_add_product(request):
             'categories': categories,
             'statuses': statuses,
             "segment": "products",
-            'action': 'Добавить продукт'
+            'action': 'Өнімді қосыңыз'
         }
         return render(request, 'admin/add-product.html', context)
 
@@ -218,7 +218,7 @@ def update_product(request, pk):
         statuses = Status.objects.all()
         product = Product.objects.get(pk=pk)
         return render(request, 'admin/add-product.html', {"segment": "products", 'product': product, 'categories': categories,
-            'statuses': statuses, 'action': 'Обновить продукт'})
+            'statuses': statuses, 'action': 'Өнімді жаңартыңыз'})
 
     if request.method == "POST":
         if request.method == "POST":
@@ -257,7 +257,7 @@ def admin_blog_list(request):
 
 def add_blog_admin(request):
     if request.method == "GET":
-        return render(request, 'admin/add-blog.html', {"segment": "blog", 'action': 'Добавить'})
+        return render(request, 'admin/add-blog.html', {"segment": "blog", 'action': 'Блог қосу'})
 
     if request.method == "POST":
         name = request.POST.get('name')
@@ -290,7 +290,7 @@ def update_blog_admin(request, pk):
         description = blog.description
         img = blog.img
         return render(request, 'admin/add-blog.html', {'name': name, 'description': description, 'img': img,
-                                                       'segment': 'blog', 'action': 'Обновить'})
+                                                       'segment': 'blog', 'action': 'Блогты жаңартыңыз'})
 
 
 def delete_blog_admin(request, pk):

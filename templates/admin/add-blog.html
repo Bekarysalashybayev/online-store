@@ -1,6 +1,6 @@
 {% extends "delivery/layouts/base.html" %}
 
-{% block title %} Добавление продуктов  {% endblock %}
+{% block title %} Блог қосу  {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -11,7 +11,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">{{ action }} блог</h4>
+                  <h4 class="card-title ">{{ action }}</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -27,14 +27,14 @@
                       <div class="row" style="margin: 0">
                         <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
                             <div class="col-md-4">
-                            <lable>Название</lable>
-                            <input type="text" class="form-control" name="name" value="{{ name }}" placeholder="Имя" required>
+                            <lable>Аты</lable>
+                            <input type="text" class="form-control" name="name" value="{{ name }}" placeholder="Аты" required>
                             </div>
                         </div>
                           <div class="col-md-12" style="padding-left: 0; padding-bottom: 30px ">
                             <div class="col-md-4">
-                            <lable>Описание</lable>
-                                <textarea rows="5" type="text" class="form-control" name="description"  placeholder="Описание" required> {{ description }}</textarea>
+                            <lable>Сипаттама</lable>
+                                <textarea rows="5" type="text" class="form-control" name="description"  placeholder="Сипаттама" required> {{ description }}</textarea>
                             </div>
                         </div>
                           <div class="col-md-12" style="padding:0 20px">
@@ -55,7 +55,7 @@
                       </div>
 
                     <div style="position: relative;">
-                        <input class="btn btn-danger" type="submit" value="Сохранить" style="position: absolute; right: 50px;">
+                        <input class="btn btn-danger" type="submit" value="Сақтау" style="position: absolute; right: 50px;">
                      </div>
                           <br>
                           <br>
